@@ -35,9 +35,9 @@ after that you will see `resume.pdf` in `public/` folder
 
 ### if you're watching this then I suggest you read web version
 
-[WEB version](https://neviaumi.github.io/resume.json/)
+[WEB version](https://chicken-suop.github.io/resume.json/)
 
-[PDF Version](https://neviaumi.github.io/resume.json/resume.pdf)
+[PDF Version](https://chicken-suop.github.io/resume.json/resume.pdf)
 
 ## Skill Level Definitions
 
