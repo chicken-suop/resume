@@ -1,5 +1,5 @@
 {
-  "author": "David Ng <david.ng.dev@gmail.com>",
+  "author": "Elliot Schep <elliot@schell.fish>",
   "dependencies": {
     "clsx": "2.1.1",
     "json-colorizer": "3.0.1",
@@ -7,7 +7,7 @@
     "playwright": "1.48.2",
     "vite": "6.0.3"
   },
-  "description": "David Ng personal resume",
+  "description": "Elliot Schep personal resume",
   "devDependencies": {
     "@busybox/commitlint-config": "2024.11.10-alpha.2150",
     "@busybox/eslint-config-code-sorting": "2024.11.10-alpha.2150",
@@ -37,7 +37,7 @@
   "main": "resume.json",
   "name": "resume.json",
   "private": true,
-  "repository": "git@github.com:davidNHK/resume.json.git",
+  "repository": "git@github.com:chicken-suop/resume.json.git",
   "scripts": {
     "prepare": "is-ci || husky"
   },
