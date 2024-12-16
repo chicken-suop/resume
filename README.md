@@ -1,8 +1,8 @@
-# resume.json
+# Elliot Schep's Resume
 
 [![deploy-github-page-after-push-master](https://github.com/chicken-suop/resume.json/actions/workflows/deploy-gh-page.yml/badge.svg)](https://github.com/chicken-suop/resume.json/actions/workflows/deploy-gh-page.yml)
 
-Repo here contain my personal resume.
+Personal resume built with JSON Resume schema.
 
 ## Development
 

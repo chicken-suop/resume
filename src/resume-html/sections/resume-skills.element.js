@@ -2,7 +2,7 @@ import './skill-badge.element.js';
 
 import clsx from 'clsx';
 
-import { skills as skillHelper, styles } from '../helpers.js';
+import { styles } from '../helpers.js';
 
 class ResumeSkillsElement extends styles.withInjectedStyles(HTMLElement)({
   mode: 'open',
@@ -12,57 +12,50 @@ class ResumeSkillsElement extends styles.withInjectedStyles(HTMLElement)({
         this.attributes['highlighted-skills'].value,
       ),
       languages = JSON.parse(this.attributes.languages.value),
-      skills = Object.entries(
-        JSON.parse(this.attributes.skills.value).reduce(
-          (acc, { keywords, level, name }) => {
-            acc[name] = {
-              ...(acc[name] || {}),
-              [level]: keywords,
-            };
-            return acc;
-          },
-          {},
-        ),
-      );
+      skills = JSON.parse(this.attributes.skills.value);
+
     const template = document.createElement('template');
     template.innerHTML = `
-<article title="skills">
+<section class="${clsx('print:tw-break-inside-avoid')}">
+<header class="${clsx('tw-mb-1.5 tw-text-3xl tw-font-black')}">Skills</header>
+<div class="${clsx('tw-flex tw-flex-col tw-gap-3')}">
 ${skills
-  .map(([name, levels]) => {
-    return `<section class="${clsx('tw-mb-2 tw-border-b tw-border-primary print:tw-break-inside-avoid')}" title="${name}">
-<header class="${clsx('tw-mb-1 tw-text-2xl tw-font-black')}">${name}</header>
-${[
-  ['Master', levels.Master],
-  ['Intermediate', levels.Intermediate],
-]
-  .map(([level, skillsOnLevel]) => {
-    if (!skillsOnLevel || skillsOnLevel.length < 1) return '';
-    return `<header class="${clsx('tw-mb-0.5 tw-text-base tw-font-bold', level === 'Master' ? 'tw-text-primary' : 'tw-text-secondary')}" title="${level}">${level}</header>
-<ul class="${clsx('tw-mb-1 tw-flex tw-w-32 tw-flex-wrap tw-gap-1 tw-px-1')}">${skillsOnLevel
-      .toSorted(skillHelper.highlightedSkillsFirst(highlightedSkills))
-      .map(skill => {
-        const skillShouldHighlighted =
-          skillHelper.includeHighlightedSkills(highlightedSkills)(skill);
-        return `<skill-badge skill="${skill}" level="${skillShouldHighlighted ? 'Highlight' : level}" element="li"></skill-badge>`;
+  .map(({ keywords, level, name }) => {
+    return `
+<div class="${clsx('tw-flex tw-flex-col tw-gap-1')}">
+  <h3 class="${clsx('tw-text-2xl tw-font-bold tw-text-primary')}">${name}</h3>
+  <ul class="${clsx('tw-flex tw-flex-wrap tw-gap-1')}">
+    ${keywords
+      .map(keyword => {
+        const isHighlighted = highlightedSkills.some(
+          skill => skill.toLowerCase() === keyword.toLowerCase(),
+        );
+        return `<skill-badge skill="${keyword}" level="${isHighlighted ? 'Highlight' : level}" element="li"></skill-badge>`;
       })
-      .join('')}</ul>
-`;
+      .join('\n')}
+  </ul>
+</div>`;
   })
   .join('\n')}
+
+${
+  languages.length > 0
+    ? `
+<div class="${clsx('tw-flex tw-flex-col tw-gap-1')}">
+  <h3 class="${clsx('tw-text-xl tw-font-bold')}">Languages</h3>
+  <ul class="${clsx('tw-flex tw-flex-wrap tw-gap-1')}">
+    ${languages
+      .map(
+        ({ fluency, language }) =>
+          `<skill-badge skill="${language}" level="${fluency}" element="li"></skill-badge>`,
+      )
+      .join('\n')}
+  </ul>
+</div>`
+    : ''
+}
+</div>
 </section>`;
-  })
-  .join('\n')}
-<section class="${clsx('tw-border-b tw-border-primary print:tw-break-inside-avoid')}" title="Languages">
-<header class="${clsx('tw-mb-1.5 tw-text-2xl tw-font-black')}">Languages</header>
-<ul class="${clsx('tw-mb-1 tw-flex tw-gap-1 tw-px-1')}">
-${languages
-  .map(
-    language =>
-      `<skill-badge skill="${language.language}" level="${language.fluency}" element="li"></skill-badge>`,
-  )
-  .join('')}</ul>
-</section>
-</article>`;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 }

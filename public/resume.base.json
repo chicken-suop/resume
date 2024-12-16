@@ -1,204 +1,133 @@
 {
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "awards": [
+    {
+      "date": "2014-01-01",
+      "title": "Consistent Application in Mathematics"
+    },
+    {
+      "date": "2014-01-01",
+      "title": "Academic Excellence in History"
+    },
+    {
+      "date": "2014-01-01",
+      "title": "Year 8 School Medallion"
+    },
+    {
+      "date": "2015-01-01",
+      "title": "Consistent Application in PD/H/PE"
+    },
+    {
+      "date": "2015-01-01",
+      "title": "Academic Excellence in Australian History"
+    },
+    {
+      "date": "2016-01-01",
+      "title": "Consistent Application in Mathematics"
+    },
+    {
+      "date": "2016-01-01",
+      "title": "Consistent Application History"
+    },
+    {
+      "date": "2016-01-01",
+      "title": "Academic Excellence in Geography"
+    }
+  ],
   "basics": {
+    "email": "elliot@schell.fish",
+    "label": "Senior Full-stack Engineer",
+    "location": {
+      "countryCode": "AU",
+      "region": "Melbourne (remote preferred)"
+    },
     "name": "Elliot Schep",
     "phone": "+610468749388",
-    "label": "Senior Full-stack Engineer",
-    "image": "https://avatars.githubusercontent.com/u/24547185?v=4",
-    "email": "elliot@schell.fish",
-    "website": "https://chicken-suop.github.io/resume",
-    "url": "https://chicken-suop.github.io/resume",
-    "summary": "Senior Full-stack Engineer with 6 years of experience in full-stack development. I am an independent, self-directed learner. I've worked mostly at startups so I am used to wearing many hats. Lived in Europe for 10 years, born in Australia",
-    "location": {
-      "city": "Melbourne (remote preferred)",
-      "countryCode": "AU"
-    },
+    "picture": "https://avatars.githubusercontent.com/u/24547185?v=4",
     "profiles": [
       {
         "network": "GitHub",
-        "username": "chicken-suop",
-        "url": "https://github.com/chicken-suop/"
+        "url": "https://github.com/chicken-suop/",
+        "username": "chicken-suop"
       },
       {
         "network": "Stack Overflow",
-        "username": "dǝɥɔS ʇoıןןƎ",
-        "url": "https://stackoverflow.com/users/7304372/"
+        "url": "https://stackoverflow.com/users/7304372/",
+        "username": "dǝɥɔS ʇoıןןƎ"
       },
       {
         "network": "LinkedIn",
-        "username": "elliot-schep",
-        "url": "https://www.linkedin.com/in/elliot-schep/"
+        "url": "https://www.linkedin.com/in/elliot-schep/",
+        "username": "elliot-schep"
       }
-    ]
+    ],
+    "summary": "Senior Full-stack Engineer with 6 years of experience in full-stack development. I am an independent, self-directed learner. I've worked mostly at startups so I am used to wearing many hats. Lived in Europe for 10 years, born in Australia",
+    "website": "https://chicken-suop.github.io/resume"
   },
-  "work": [
-    {
-      "name": "AusProof Pty Ltd",
-      "location": "Melbourne, Australia (remote)",
-      "position": "Senior full-stack engineer (Contract)",
-      "url": "https://www.ausproof.com.au/",
-      "startDate": "2024-02-20",
-      "summary": "Worked on modernisation of an in-house ERP system, transitioning it to a contemporary tech stack. Due to a highly restrictive NDA, detailed project specifics cannot be disclosed",
-      "highlights": [
-        "Transitioned from a legacy monolithic, on-premises application to a containerised and serverless architecture, resulting in improved scalability and maintainability",
-        "Spearheaded the migration of the codebase to GitHub, introducing modern version control practices, streamlined CI/CD pipelines, and improved collaboration",
-        "Replaced raw HTML/JS/CSS with a modern UI framework, enhancing the user interface for better usability and responsiveness",
-        "Revamped backend services with a focus on performance, reliability, and scalability (details restricted by NDA)",
-        "Redesigned the database architecture, implementing optimisations to improve data integrity, query performance, and scalability (details restricted by NDA)",
-        "Collaborated with cross-functional teams to align technical solutions with business requirements and ensure compliance with industry standards"
-      ]
-    },
-    {
-      "name": "Desygner",
-      "location": "Gold Coast, Australia",
-      "position": "Team lead, senior full-stack engineer (Contract)",
-      "url": "https://desygner.com/",
-      "startDate": "2020-10-01",
-      "endDate": "2022-12-30",
-      "summary": "Led the main product team as a senior full-stack engineer, specializing in advancing graphic editor technology while mentoring junior developers, improving processes, and enhancing application quality and reliability",
-      "highlights": [
-        "Led a team of 5 developers and 4 QA testers as team lead and senior full-stack engineer",
-        "Mentored multiple junior developers, fostering career growth",
-        "Played an active role in hiring, including interviewing and selecting developers",
-        "Specialized in enhancing graphic editor technology and managing a complex codebase",
-        "Implemented strategies like automated testing, modularization, decoupling, and software design patterns to improve reliability and quality",
-        "Collaborated with cross-functional teams to deliver high-quality features",
-        "Contributed to forums and discussions to refine processes, tools, and development practices"
-      ]
-    },
-    {
-      "name": "Amartus",
-      "location": "Krakow, Poland",
-      "position": "Lead Frontend Engineer",
-      "url": "https://amartus.com/nbrace/",
-      "startDate": "2019-02-01",
-      "endDate": "2020-06-01",
-      "summary": "Led frontend development for the nBrace platform and contributed to Itential’s network automation projects, focusing on enhancing infrastructure transparency and automation",
-      "highlights": [
-        "2020: Lead Frontend Developer for the Inter-Provider Service Automation Platform, nBrace",
-        "2019–2020: Worked with Itential on two projects for their network automation solution, 'IAP'",
-        "Developed a solution for managing network infrastructure using NSO and IAP to automate and upgrade multiple network devices",
-        "Created a load balance manager with custom NSO actions for searching, creating, updating, and deleting services",
-        "Contributed to both frontend and backend development, with a focus on network orchestration"
-      ]
-    },
-    {
-      "name": "Rebel Software",
-      "location": "Krakow, Poland",
-      "position": "Frontend Developer (Contract)",
-      "url": "https://www.rebel.agency/",
-      "startDate": "2017-11-01",
-      "endDate": "2018-12-01",
-      "summary": "Led the frontend development at Rebel Software, revitalizing a 3+ year old custom CRM into a production-ready system for multiple clients",
-      "highlights": [
-        "Improved user satisfaction by enhancing CRM usability",
-        "Designed and developed websites, apps, and tools for Rebel's CRM/management software, 'Voom', and third-party clients",
-        "Worked on Software as a Service (SaaS) applications",
-        "Developed and maintained a hosted application on AWS infrastructure",
-        "Collaborated on a system powered by a cluster of services, utilizing Go for backend development"
-      ]
-    },
-    {
-      "name": "Maxima Consulting",
-      "location": "Krakow, Poland",
-      "position": "Frontend Developer (Internship)",
-      "url": "https://www.maximaconsulting.com/",
-      "startDate": "2017-01-01",
-      "endDate": "2018-05-01",
-      "summary": "Contributed to open-source ERP and developed websites using multiple CMS platforms, along with a Python-based data importer/exporter for real estate automation",
-      "highlights": [
-        "Open-source contributions to ERPNext, including plugin development",
-        "Designed and developed websites with various CMS platforms:",
-        "diversityhub.pl: Built with OctoberCMS in collaboration with another developer",
-        "KLG Properties: Worked with two developers on theme customization",
-        "Automated parsing of real estate data into a database and file system using Python"
-      ]
-    },
-    {
-      "name": "Thinkspace Jeweler",
-      "location": "Krakow, Poland",
-      "position": "Full-stack Developer (Contract)",
-      "url": "https://amartus.com/nbrace/",
-      "startDate": "2018-01-01",
-      "endDate": "2018-04-30",
-      "summary": "Designed and developed apps and admin tools, including a CMS tailored for the jewelry industry, with a focus on inventory and site management",
-      "highlights": [
-        "Created website apps and admin tools for inventory and site management",
-        "Developed a CMS specifically for the jewelry industry, featuring an intuitive website creator",
-        "Designed and implemented a drag-and-drop page creator for easy customization",
-        "Built tools for updating specific parts of the CMS using React",
-        "Worked primarily with React and Django for development"
-      ]
-    }
-  ],
-  "volunteer": [
-    {
-      "organization": "KDM Technical Team",
-      "position": "Sound/Lighting Technician",
-      "url": "https://www.koscioldlamiasta.pl/",
-      "startDate": "2015-04-01",
-      "endDate": "2020-06-01",
-      "summary": "Volunteered as a sound and lighting technician for large-scale events, overseeing the design, setup, and operation of stage audio, video, and lighting systems. Worked closely with a 20-person technical team to manage and execute events with thousands of attendees each month. Additionally, contributed to the development of technical applications and solutions to streamline event operations.",
-      "highlights": [
-        "Led the management and operation of sound, video, and lighting systems for high-profile, large-scale events with thousands of attendees",
-        "Collaborated with a diverse 20-person team to deliver seamless technical production for weekly and monthly events",
-        "Played a key role in the technical execution of stage productions, ensuring high-quality audio-visual experiences",
-        "Designed and developed multiple applications to support event management, improving workflow and operational efficiency",
-        "Contributed to system architecture and integration for various stage setups, enhancing technical reliability and scalability"
-      ]
-    }
-  ],
   "education": [
     {
-      "institution": "Karabar",
-      "url": "https://karabar-h.schools.nsw.gov.au/",
       "area": "General Education",
-      "studyType": "High School",
-      "startDate": "2014-01-01",
+      "courses": [],
       "endDate": "2016-01-01",
-      "courses": []
+      "institution": "Karabar",
+      "startDate": "2014-01-01",
+      "studyType": "High School",
+      "url": "https://karabar-h.schools.nsw.gov.au/"
     },
     {
-      "institution": "Advanced Mathematics tutoring and training",
       "area": "Advanced Mathematics",
-      "studyType": "Private",
-      "startDate": "2015-01-01",
+      "courses": [],
       "endDate": "2016-01-01",
-      "courses": []
+      "institution": "Advanced Mathematics tutoring and training",
+      "startDate": "2015-01-01",
+      "studyType": "Private"
     }
   ],
-  "awards": [
+  "interests": [
     {
-      "title": "Consistent Application in Mathematics",
-      "date": "2014-01-01"
+      "keywords": [
+        "Traditional and Functional Strength Training",
+        "Focal Utopia Headphones",
+        "Pencil Drawing",
+        "Dune Book Series"
+      ],
+      "name": "Stuff I like in general"
     },
     {
-      "title": "Academic Excellence in History",
-      "date": "2014-01-01"
+      "keywords": [
+        "The Phoenix Project/The Unicorn Project",
+        "Clean Series",
+        "The Software Craftsman",
+        "Pragmatic Programmer",
+        "The Art of Unit Testing",
+        "Working effectively with legacy code"
+      ],
+      "name": "Developer books I recommend"
+    }
+  ],
+  "languages": [
+    {
+      "fluency": "Native speaker",
+      "language": "English"
+    }
+  ],
+  "meta": {
+    "canonical": "https://chicken-suop.github.io/resume.json"
+  },
+  "references": [
+    {
+      "company": "Rebel Software",
+      "date": "2021-08-11",
+      "name": "Santosh Prasad Sah",
+      "position": "Sr. Go/GoLang Engineer | Backend Engineer | Architect | DevOps",
+      "reference": "It was really great working with Elliot in Rebel Software Ltd. He used his design skills to modify and create new pages for Voom CRM. He is team player and always strive to improve design. I wish him best of luck"
     },
     {
-      "title": "Year 8 School Medallion",
-      "date": "2014-01-01"
-    },
-    {
-      "title": "Consistent Application in PD/H/PE",
-      "date": "2015-01-01"
-    },
-    {
-      "title": "Academic Excellence in Australian History",
-      "date": "2015-01-01"
-    },
-    {
-      "title": "Consistent Application in Mathematics",
-      "date": "2016-01-01"
-    },
-    {
-      "title": "Consistent Application History",
-      "date": "2016-01-01"
-    },
-    {
-      "title": "Academic Excellence in Geography",
-      "date": "2016-01-01"
+      "company": "Amartus",
+      "date": "2020-09-07",
+      "name": "Adam Lach",
+      "position": "Java Software Engineer",
+      "reference": "Elliot is a highly motivated UI developer, always focused on improvements and possibilities. He introduced many new ideas to UI solutions on both levels: business(UX) and technical(frameworks). Elliot is a relatively young developer but I think that with his level of motivation and potential he can be a very mature developer in a short time."
     }
   ],
   "skills": [
@@ -241,8 +170,6 @@
       "name": "Devops"
     },
     {
-      "level": "Senior",
-      "name": "Soft Skills",
       "keywords": [
         "Communication",
         "Teamwork",
@@ -251,22 +178,16 @@
         "Adaptability",
         "Time Management",
         "Self-Motivation"
-      ]
+      ],
+      "level": "Senior",
+      "name": "Soft Skills"
     },
     {
+      "keywords": ["Agile", "Scrum", "Kanban", "Jira", "Trello"],
       "level": "Senior",
-      "name": "Project Management",
-      "keywords": [
-        "Agile",
-        "Scrum",
-        "Kanban",
-        "Jira",
-        "Trello"
-      ]
+      "name": "Project Management"
     },
     {
-      "level": "Senior",
-      "name": "Testing",
       "keywords": [
         "Testcontainers",
         "System tests",
@@ -274,51 +195,126 @@
         "Contract testing",
         "Narrow & Wide integration tests",
         "Jest/Cypress/Mocha/Jasmine/Playwright/Puppeteer/Karma/etc"
-      ]
+      ],
+      "level": "Senior",
+      "name": "Testing"
     }
   ],
-  "languages": [
+  "volunteer": [
     {
-      "language": "English",
-      "fluency": "Native speaker"
+      "endDate": "2020-06-01",
+      "highlights": [
+        "Led the management and operation of sound, video, and lighting systems for high-profile, large-scale events with thousands of attendees",
+        "Collaborated with a diverse 20-person team to deliver seamless technical production for weekly and monthly events",
+        "Played a key role in the technical execution of stage productions, ensuring high-quality audio-visual experiences",
+        "Designed and developed multiple applications to support event management, improving workflow and operational efficiency",
+        "Contributed to system architecture and integration for various stage setups, enhancing technical reliability and scalability"
+      ],
+      "organization": "KDM Technical Team",
+      "position": "Sound/Lighting Technician",
+      "startDate": "2015-04-01",
+      "summary": "Volunteered as a sound and lighting technician for large-scale events, overseeing the design, setup, and operation of stage audio, video, and lighting systems. Worked closely with a 20-person technical team to manage and execute events with thousands of attendees each month. Additionally, contributed to the development of technical applications and solutions to streamline event operations.",
+      "url": "https://www.koscioldlamiasta.pl/"
     }
   ],
-  "interests": [
+  "work": [
     {
-      "name": "Stuff I like in general",
-      "keywords": [
-        "Traditional and Functional Strength Training",
-        "Focal Utopia Headphones",
-        "Pencil Drawing",
-        "Dune Book Series"
-      ]
+      "company": "AusProof Pty Ltd",
+      "highlights": [
+        "Transitioned from a legacy monolithic, on-premises application to a containerised and serverless architecture, resulting in improved scalability and maintainability",
+        "Spearheaded the migration of the codebase to GitHub, introducing modern version control practices, streamlined CI/CD pipelines, and improved collaboration",
+        "Replaced raw HTML/JS/CSS with a modern UI framework, enhancing the user interface for better usability and responsiveness",
+        "Revamped backend services with a focus on performance, reliability, and scalability (details restricted by NDA)",
+        "Redesigned the database architecture, implementing optimisations to improve data integrity, query performance, and scalability (details restricted by NDA)",
+        "Collaborated with cross-functional teams to align technical solutions with business requirements and ensure compliance with industry standards"
+      ],
+      "location": "Melbourne, Australia (remote)",
+      "position": "Senior full-stack engineer (Contract)",
+      "startDate": "2024-02-20",
+      "summary": "Worked on modernisation of an in-house ERP system, transitioning it to a contemporary tech stack. Due to a highly restrictive NDA, detailed project specifics cannot be disclosed",
+      "website": "https://www.ausproof.com.au/"
     },
     {
-      "name": "Developer books I recommend",
-      "keywords": [
-        "The Phoenix Project/The Unicorn Project",
-        "Clean Series",
-        "The Software Craftsman",
-        "Pragmatic Programmer",
-        "The Art of Unit Testing",
-        "Working effectively with legacy code"
-      ]
-    }
-  ],
-  "references": [
-    {
-      "name": "Santosh Prasad Sah",
-      "reference": "It was really great working with Elliot in Rebel Software Ltd. He used his design skills to modify and create new pages for Voom CRM. He is team player and always strive to improve design. I wish him best of luck",
-      "position": "Sr. Go/GoLang Engineer | Backend Engineer | Architect | DevOps",
-      "company": "Rebel Software",
-      "date": "2021-08-11"
+      "company": "Desygner",
+      "endDate": "2022-12-30",
+      "highlights": [
+        "Led a team of 5 developers and 4 QA testers as team lead and senior full-stack engineer",
+        "Mentored multiple junior developers, fostering career growth",
+        "Played an active role in hiring, including interviewing and selecting developers",
+        "Specialized in enhancing graphic editor technology and managing a complex codebase",
+        "Implemented strategies like automated testing, modularization, decoupling, and software design patterns to improve reliability and quality",
+        "Collaborated with cross-functional teams to deliver high-quality features",
+        "Contributed to forums and discussions to refine processes, tools, and development practices"
+      ],
+      "location": "Gold Coast, Australia",
+      "position": "Team lead, senior full-stack engineer (Contract)",
+      "startDate": "2020-10-01",
+      "summary": "Led the main product team as a senior full-stack engineer, specializing in advancing graphic editor technology while mentoring junior developers, improving processes, and enhancing application quality and reliability",
+      "url": "https://desygner.com/"
     },
     {
-      "name": "Adam Lach",
-      "reference": "Elliot is a highly motivated UI developer, always focused on improvements and possibilities. He introduced many new ideas to UI solutions on both levels: business(UX) and technical(frameworks). Elliot is a relatively young developer but I think that with his level of motivation and potential he can be a very mature developer in a short time.",
-      "position": "Java Software Engineer",
       "company": "Amartus",
-      "date": "2020-09-07"
+      "endDate": "2020-06-01",
+      "highlights": [
+        "2020: Lead Frontend Developer for the Inter-Provider Service Automation Platform, nBrace",
+        "2019–2020: Worked with Itential on two projects for their network automation solution, 'IAP'",
+        "Developed a solution for managing network infrastructure using NSO and IAP to automate and upgrade multiple network devices",
+        "Created a load balance manager with custom NSO actions for searching, creating, updating, and deleting services",
+        "Contributed to both frontend and backend development, with a focus on network orchestration"
+      ],
+      "location": "Krakow, Poland",
+      "position": "Lead Frontend Engineer",
+      "startDate": "2019-02-01",
+      "summary": "Led frontend development for the nBrace platform and contributed to Itential’s network automation projects, focusing on enhancing infrastructure transparency and automation",
+      "url": "https://amartus.com/nbrace/"
+    },
+    {
+      "company": "Rebel Software",
+      "endDate": "2018-12-01",
+      "highlights": [
+        "Improved user satisfaction by enhancing CRM usability",
+        "Designed and developed websites, apps, and tools for Rebel's CRM/management software, 'Voom', and third-party clients",
+        "Worked on Software as a Service (SaaS) applications",
+        "Developed and maintained a hosted application on AWS infrastructure",
+        "Collaborated on a system powered by a cluster of services, utilizing Go for backend development"
+      ],
+      "location": "Krakow, Poland",
+      "position": "Frontend Developer (Contract)",
+      "startDate": "2017-11-01",
+      "summary": "Led the frontend development at Rebel Software, revitalizing a 3+ year old custom CRM into a production-ready system for multiple clients",
+      "url": "https://www.rebel.agency/"
+    },
+    {
+      "company": "Maxima Consulting",
+      "endDate": "2018-05-01",
+      "highlights": [
+        "Open-source contributions to ERPNext, including plugin development",
+        "Designed and developed websites with various CMS platforms:",
+        "diversityhub.pl: Built with OctoberCMS in collaboration with another developer",
+        "KLG Properties: Worked with two developers on theme customization",
+        "Automated parsing of real estate data into a database and file system using Python"
+      ],
+      "location": "Krakow, Poland",
+      "position": "Frontend Developer (Internship)",
+      "startDate": "2017-01-01",
+      "summary": "Contributed to open-source ERP and developed websites using multiple CMS platforms, along with a Python-based data importer/exporter for real estate automation",
+      "url": "https://www.maximaconsulting.com/"
+    },
+    {
+      "company": "Thinkspace Jeweler",
+      "endDate": "2018-04-30",
+      "highlights": [
+        "Created website apps and admin tools for inventory and site management",
+        "Developed a CMS specifically for the jewelry industry, featuring an intuitive website creator",
+        "Designed and implemented a drag-and-drop page creator for easy customization",
+        "Built tools for updating specific parts of the CMS using React",
+        "Worked primarily with React and Django for development"
+      ],
+      "location": "Krakow, Poland",
+      "position": "Full-stack Developer (Contract)",
+      "startDate": "2018-01-01",
+      "summary": "Designed and developed apps and admin tools, including a CMS tailored for the jewelry industry, with a focus on inventory and site management",
+      "url": "https://amartus.com/nbrace/"
     }
   ]
 }

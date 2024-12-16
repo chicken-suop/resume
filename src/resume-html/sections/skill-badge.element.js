@@ -6,31 +6,24 @@ class SkillBadgeElement extends styles.withInjectedStyles(HTMLElement)({
   mode: 'open',
 }) {
   connectedCallback() {
-    const skill = this.attributes.skill.value;
-    const level = this.attributes.level.value;
-    const elementName = this.attributes.element.value;
-    const template = document.createElement('template');
-    const styleByLevel = {
-      Highlight: clsx(
-        'tw-border tw-border-emerald-700 tw-bg-emerald-500 tw-font-bold tw-text-white',
-      ),
-      Intermediate: clsx('tw-bg-sky-300 tw-font-medium tw-text-white'),
-      Master: clsx(
-        'tw-border tw-border-amber-700 tw-bg-amber-500 tw-font-bold tw-text-white',
-      ),
-      Unknown: clsx('tw-border tw-border-gray-300 tw-text-gray-600'),
+    const element = this.attributes.element.value,
+      level = this.attributes.level.value,
+      skill = this.attributes.skill.value;
+
+    const badgeClasses = {
+      Highlight: 'tw-bg-primary tw-text-white',
+      Intermediate: 'tw-bg-yellow-100 tw-text-yellow-800',
+      Master: 'tw-bg-green-100 tw-text-green-800',
+      'Native speaker': 'tw-bg-purple-100 tw-text-purple-800',
+      Senior: 'tw-bg-blue-100 tw-text-blue-800',
+      Unknown: 'tw-bg-gray-100 tw-text-gray-800',
     };
-    // language=html
-    template.innerHTML = `
-      <${elementName} class="${clsx(
-        'tw-rounded-full',
-        'tw-px-1.5',
-        'tw-py-0.5',
-        'tw-text-center',
-        'tw-text-base',
-        styleByLevel[level],
-      )}">${skill}
-      </${elementName}>`;
+
+    const template = document.createElement('template');
+    template.innerHTML = `<${element} class="${clsx(
+      'tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-medium',
+      badgeClasses[level] ?? 'tw-bg-gray-100 tw-text-gray-800',
+    )}">${skill}</${element}>`;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 }

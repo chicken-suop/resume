@@ -35,7 +35,7 @@
   },
   "license": "MIT",
   "main": "resume.json",
-  "name": "resume.json",
+  "name": "elliot-schep-resume",
   "private": true,
   "repository": "git@github.com:chicken-suop/resume.json.git",
   "scripts": {

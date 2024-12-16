@@ -16,13 +16,13 @@ class ResumeReferencesElement extends styles.withInjectedStyles(HTMLElement)({
     <ul class="${clsx('tw-flex tw-flex-col tw-gap-2')}">${references
       .map(({ name, reference }, index) => {
         return `<li class="${clsx('tw-border-b tw-border-gray-200 print:tw-break-inside-avoid')}" title="${name}" aria-describedby="reference-${index}">
-${index === 0 ? `<header id="resume-references-section-header" class="${clsx('tw-mb-1.5 tw-text-3xl tw-font-black tw-underline tw-underline-offset-8 print:tw-underline-offset-4')}">References</header>` : ''}
+${index === 0 ? `<header id="resume-references-section-header" class="${clsx('tw-mb-1.5 tw-text-3xl tw-font-black')}">References</header>` : ''}
 
 <a href="${linkedInLink}" target="_blank" class="${clsx('tw-flex tw-flex-col tw-gap-1 tw-py-2')}">
   <blockquote cite="${linkedInLink}">
-    <p class="${clsx('tw-text-sm')}" id="reference-${index}">${reference}</p>
+    <p class="${clsx('tw-text-base tw-font-medium tw-text-primary')}" id="reference-${index}">${reference}</p>
   </blockquote>
-  <p class="${clsx('tw-flex tw-justify-end tw-text-base tw-font-medium tw-text-gray-600')}">
+  <p class="${clsx('tw-flex tw-justify-end tw-text-xl tw-font-bold tw-text-gray-600')}">
     ${name}
   </p>
 </a>

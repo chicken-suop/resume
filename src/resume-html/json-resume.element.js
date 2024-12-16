@@ -1,12 +1,14 @@
 import './sections/resume-header.element.js';
 import './sections/resume-about.element.js';
 import './sections/resume-skills.element.js';
-import './sections/resume-skill-explained.element.js';
 import './sections/resume-summary.element.js';
 import './sections/resume-experiences.element.js';
 import './sections/resume-references.element.js';
 import './sections/resume-projects.element.js';
 import './sections/resume-education.element.js';
+import './sections/resume-interests.element.js';
+import './sections/resume-volunteer.element.js';
+import './sections/resume-awards.element.js';
 
 import clsx from 'clsx';
 
@@ -43,27 +45,12 @@ class JsonResumeElement extends styles.withInjectedStyles(HTMLElement)({
                 <section class="${clsx('tw-grid tw-gap-2 md:tw-grid-cols-[16rem_minmax(0,1fr)] md:tw-gap-8 ')}">
                     <div class="${clsx('tw-flex tw-flex-col tw-gap-3')}">
                         <resume-about data='${json.withQuoteEscape(JSON.stringify)(resume.basics)}'></resume-about>
-                        <resume-skill-explained
-                                highlighted-skills='${json.withQuoteEscape(JSON.stringify)(highlightedSkills)}'
-                                github-link='${json.withQuoteEscape(
-                                  JSON.stringify,
-                                )(
-                                  (() => {
-                                    const githubProfile =
-                                      resume.basics.profiles.find(
-                                        profile =>
-                                          profile.network.toLowerCase() ===
-                                          'github',
-                                      );
-                                    if (!githubProfile) return null;
-                                    return githubProfile.url;
-                                  })(),
-                                )}'></resume-skill-explained>
                         <resume-skills skills='${json.withQuoteEscape(JSON.stringify)(resume.skills)}'
                                        languages='${json.withQuoteEscape(JSON.stringify)(resume.languages)}'
                                        highlighted-skills='${json.withQuoteEscape(JSON.stringify)(highlightedSkills)}'
                         ></resume-skills>
-                        
+                        <resume-interests interests='${json.withQuoteEscape(JSON.stringify)(resume.interests)}'></resume-interests>
+                        <resume-awards awards='${json.withQuoteEscape(JSON.stringify)(resume.awards)}'></resume-awards>
                     </div>
                     <div class="${clsx('tw-flex tw-flex-col tw-gap-3 md:tw-border-l md:tw-border-primary md:tw-pl-4')}">
                         <resume-summary
@@ -72,6 +59,7 @@ class JsonResumeElement extends styles.withInjectedStyles(HTMLElement)({
                                             skills='${JSON.stringify(resume.skills)}'
                                             highlighted-skills='${json.withQuoteEscape(JSON.stringify)(highlightedSkills)}'
                         ></resume-experiences>
+                        <resume-volunteer volunteer='${json.withQuoteEscape(JSON.stringify)(resume.volunteer)}'></resume-volunteer>
                         <resume-references references='${json.withQuoteEscape(JSON.stringify)(resume.references)}'
                                            linkedin-link="${linkedInLink}"></resume-references>
                         <resume-projects projects='${json.withQuoteEscape(JSON.stringify)(resume.projects)}'
