@@ -42,12 +42,12 @@ class JsonResumeElement extends HTMLElement {
       <resume-volunteer volunteer='${this.safeStringify(resumeData.volunteer || [])}'></resume-volunteer>
       <resume-education educations='${this.safeStringify(resumeData.education || [])}'></resume-education>
       <resume-projects projects='${this.safeStringify(resumeData.projects || [])}'></resume-projects>
-      <resume-awards awards='${this.safeStringify(resumeData.awards || [])}'></resume-awards>
       <resume-skills
-        skills='${this.safeStringify(resumeData.skills || [])}'
-        languages='${this.safeStringify(resumeData.languages || [])}'
+      skills='${this.safeStringify(resumeData.skills || [])}'
+      languages='${this.safeStringify(resumeData.languages || [])}'
       ></resume-skills>
       <resume-interests interests='${this.safeStringify(resumeData.interests || [])}'></resume-interests>
+      <resume-awards awards='${this.safeStringify(resumeData.awards || [])}'></resume-awards>
       <resume-references references='${this.safeStringify(resumeData.references || [])}'></resume-references>
     `;
   }

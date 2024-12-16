@@ -7,20 +7,16 @@ class ResumeAwardsElement extends HTMLElement {
           ? `
         <section id="awards">
           <h3>Awards</h3>
-          <div class="stack">
+          <div class="grid-list">
             ${awards
               .map(
                 award => `
-              <article>
-                <header>
-                  <h4>${award.title}</h4>
-                  <div class="meta">
-                    ${award.awarder ? `<div>Awarded by <strong>${award.awarder}</strong></div>` : ''}
-                    <time datetime="${award.date}">${award.date}</time>
-                  </div>
-                </header>
-                ${award.summary ? `<p>${award.summary}</p>` : ''}
-              </article>
+              <div class="award-item">
+                <h5>${award.title}</h5>
+                <div class="meta">
+                  <time datetime="${award.date}">${this.formatDate(award.date)}</time>
+                </div>
+              </div>
             `,
               )
               .join('')}
@@ -29,6 +25,11 @@ class ResumeAwardsElement extends HTMLElement {
       `
           : ''
       }`;
+  }
+
+  formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.getFullYear();
   }
 }
 
