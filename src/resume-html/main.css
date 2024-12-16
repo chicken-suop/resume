@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -17,16 +18,19 @@ json-resume {
   font: 1em/1.5 Lato, sans-serif;
   gap: 2em;
   grid-template-columns:
-    [full-start] minmax(1em, 1fr)
-    [main-start] minmax(min-content, 48em)
-    [main-end] minmax(1em, 1fr)
+    [full-start] minmax(0, 1fr)
+    [main-start] minmax(0, 48em)
+    [main-end] minmax(0, 1fr)
     [full-end];
   grid-template-rows: auto [content] 0;
   margin-bottom: 4em;
   width: 100%;
   scroll-snap-type: y proximity;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100vh;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 json-resume:before {
@@ -877,5 +881,33 @@ section {
 
   .masthead .icon-list .network {
     display: inline; /* Show network labels on desktop */
+  }
+}
+
+/* Add mobile-specific adjustments */
+@media (max-width: 48em) {
+  /* Adjust padding for mobile */
+  .masthead {
+    padding: 2em 1em;
+  }
+
+  /* Ensure content doesn't overflow on mobile */
+  .grid-list {
+    grid-template-columns: 1fr;
+    padding: 0 1em;
+  }
+
+  /* Adjust icon list for better mobile display */
+  .icon-list {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 1em;
+  }
+
+  /* Ensure expandable content doesn't cause horizontal scroll */
+  .expandable-content {
+    max-width: 100vw;
+    padding: 0 1em 1em;
+    word-break: break-word;
   }
 }
