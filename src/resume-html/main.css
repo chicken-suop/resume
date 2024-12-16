@@ -1,26 +1,712 @@
-@import '@busybox/tailwindcss-config/tailwind.css';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
 
-@page {
-    size: A4 portrait;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+}
+
+json-resume {
+  background: var(--color-background);
+  color: var(--color-primary);
+  display: grid;
+  font: 1em/1.5 Lato, sans-serif;
+  gap: 2em;
+  grid-template-columns:
+    [full-start] minmax(1em, 1fr)
+    [main-start] minmax(min-content, 48em)
+    [main-end] minmax(1em, 1fr)
+    [full-end];
+  grid-template-rows: auto [content] 0;
+  margin-bottom: 4em;
+  width: 100%;
+  scroll-snap-type: y proximity;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+json-resume:before {
+  content: "";
+  grid-column: full;
+  grid-row: content;
+}
+
+:root {
+  color-scheme: light dark;
+
+  --color-background-light: #ffffff;
+  --color-dimmed-light: #f3f4f5;
+  --color-primary-light: #191e23;
+  --color-secondary-light: #6c7781;
+  --color-accent-light: #0073aa;
+
+  --color-background-dark: #191e23;
+  --color-dimmed-dark: #23282d;
+  --color-primary-dark: #fbfbfc;
+  --color-secondary-dark: #ccd0d4;
+  --color-accent-dark: #00a0d2;
+
+  --color-background: var(--color-background-light);
+  --color-dimmed: var(--color-dimmed-light);
+  --color-primary: var(--color-primary-light);
+  --color-secondary: var(--color-secondary-light);
+  --color-accent: var(--color-accent-light);
+
+  --scale-ratio: 1.25;
+  --scale0: 1rem;
+  --scale1: calc(var(--scale0) * var(--scale-ratio));
+  --scale2: calc(var(--scale1) * var(--scale-ratio));
+  --scale3: calc(var(--scale2) * var(--scale-ratio));
+  --scale4: calc(var(--scale3) * var(--scale-ratio));
+  --scale5: calc(var(--scale4) * var(--scale-ratio));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--color-background-dark);
+    --color-dimmed: var(--color-dimmed-dark);
+    --color-primary: var(--color-primary-dark);
+    --color-secondary: var(--color-secondary-dark);
+    --color-accent: var(--color-accent-dark);
+  }
+}
+
+/* Typography */
+h1, h2, h3, h5 {
+  font-weight: 400;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+}
+
+h1 { font-size: var(--scale5); }
+h2 {
+  color: var(--color-secondary);
+  font-size: var(--scale4);
+}
+h3 {
+  color: var(--color-secondary);
+  font-size: var(--scale3);
+}
+h4 { font-size: var(--scale2); }
+h5 { font-size: var(--scale1); }
+h6 { font-size: var(--scale0); }
+
+/* Links */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+/* Lists */
+ol, ul {
+  padding-left: 1em;
+}
+
+:not(.icon-list,.tag-list)>li+li {
+  margin-top: .4em;
+}
+
+li::marker, .network {
+  color: var(--color-secondary);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  list-style: none;
+  padding: 0;
+}
+
+.tag-list > li {
+  background: var(--color-dimmed);
+  border-radius: 0.2em;
+  padding: 0.2em 0.6em;
+}
+
+.icon-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1em;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+/* Sections */
+.masthead > *,
+section {
+  grid-column: main;
+}
+
+.stack {
+  display: grid;
+  gap: 1.5em;
+}
+
+.grid-list {
+  display: grid;
+  gap: 1em;
+}
+
+/* Header */
+.masthead {
+  background: var(--color-dimmed);
+  display: inherit;
+  gap: inherit;
+  grid-column: full;
+  grid-template-columns: inherit;
+  padding: 4em 0;
+  text-align: center;
+}
+
+.masthead > img {
+  border: 4px solid var(--color-primary);
+  border-radius: 50%;
+  margin: 0 auto;
+  max-width: 12em;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* Timeline */
+.timeline > div {
+  position: relative;
+}
+
+.timeline > div:not(:last-child) {
+  padding-bottom: 1rem;
+}
+
+.timeline > div:not(:last-child):before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: -15px;
+  width: 2px;
+  height: 100%;
+  background: var(--color-secondary);
+}
+
+.timeline > div:not(:only-child):after {
+  content: "";
+  position: absolute;
+  top: .6rem;
+  left: -20px;
+  width: 8px;
+  height: 8px;
+  background: var(--color-secondary);
+  border: 2px solid var(--color-background);
+  border-radius: 50%;
+}
+
+/* Other Elements */
+article > * + *,
+blockquote > * + *,
+.expandable-content > * + * {
+  margin-top: 0.6em;
+}
+
+blockquote {
+  border-left: 0.2em solid var(--color-dimmed);
+  padding-left: 1em;
+}
+
+cite {
+  color: var(--color-secondary);
+  font-style: inherit;
+}
+
+cite:before {
+  content: "— ";
+}
+
+.meta {
+  color: var(--color-secondary);
+}
+
+svg {
+  margin-right: 0.2em;
+  vertical-align: text-bottom;
+}
+
+/* Media Queries */
+@media print, (min-width: 48em) {
+  h3 {
+    text-align: right;
+    margin-bottom: inherit;
+  }
+
+  .masthead {
+    text-align: inherit;
+  }
+
+  .masthead > *, section {
+    grid-column: content;
+  }
+
+  .masthead img {
+    grid-column: side-start / side-end;
+    grid-row: span 2;
+    max-width: 100%;
+  }
+
+  section,
+  :host > section {
+    display: contents;
+  }
+
+  .icon-list {
+    flex-direction: column;
+  }
+
+  .grid-list {
+    grid-template-columns: repeat(auto-fit, minmax(calc((100% - 1em)/2), 1fr));
+  }
 }
 
 @media print {
-    :root {
-        font-size: 50%; /* When default font size is 16px, 50% is 8px, all rem will be based on 8px */
-    }
-
-    body {
-        font-size: 2rem; /*Restore default font size*/
-    }
+  .duration {
+    display: none;
+  }
 }
 
+/* Add these new selectors */
+resume-header,
+resume-experiences,
+resume-volunteer,
+resume-education,
+resume-projects,
+resume-awards,
+resume-skills,
+resume-interests,
+resume-references {
+  display: contents;
+}
 
-@layer base {
-    * {
-        font-family: "Roboto", serif;
-        font-style: normal;
-    }
+resume-header {
+  display: grid;
+  grid-column: full;
+  gap: 2em;
+  grid-template-columns: [full-start] 1fr [main-start side-start] minmax(min-content, 12em) [side-end content-start] minmax(min-content, 36em) [main-end content-end] 1fr [full-end];
+  grid-template-rows: auto [content] 0;
+  margin-bottom: 4em;
+  width: 100%;
+}
+
+/* Add these styles for references */
+#references blockquote {
+  border-left: 0.2em solid var(--color-dimmed);
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+
+#references blockquote p {
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1em;
+}
+
+#references cite {
+  color: var(--color-secondary);
+  display: block;
+  font-size: 0.9em;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+#references cite time {
+  color: var(--color-secondary);
+  font-size: 0.9em;
+}
+
+#references .stack {
+  gap: 2em;
+}
+
+/* Expandable sections */
+.expandable {
+  border: 1px solid var(--color-dimmed);
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+
+.expandable-header {
+  align-items: center;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
+  padding: 1em;
+  text-align: left;
+  width: 100%;
+}
+
+.expandable-header:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+
+.expand-icon {
+  color: var(--color-secondary);
+  height: 1.2em;
+  margin: 0;
+  transition: transform 0.2s ease;
+  width: 1.2em;
+}
+
+.expandable.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+.expandable-content {
+  display: none;
+  padding: 0 1em 1em;
+}
+
+.expandable.expanded .expandable-content {
+  display: block;
+}
+
+/* Show content by default on larger screens */
+@media (min-width: 48em) {
+  .expandable-content {
+    display: block;
+  }
+
+  .expand-icon {
+    display: none;
+  }
+
+  .expandable {
+    border: none;
+    border-radius: 0;
+  }
+
+  .expandable-header {
+    cursor: default;
+    padding: 0;
+  }
+}
+
+/* Update the company URL link styles */
+.company-url {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5em;
+}
+
+.company-url svg {
+  height: 1em;
+  width: 1em;
+  margin: 0;
+}
+
+.company-url:hover {
+  color: var(--color-accent);
+}
+
+/* Update h4 styles for better alignment */
+.expandable-header h4 {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Update header preview styles */
+.expandable-header > div {
+  flex: 1;
+}
+
+.expandable-header h4 {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+.expandable-header .meta {
+  margin-top: 0.3em;
+  font-size: 0.9em;
+}
+
+.expandable-header strong {
+  display: block;
+  color: var(--color-primary);
+  font-weight: normal;
+}
+
+/* Adjust spacing in expanded content */
+.expandable-content .meta:first-child {
+  margin-top: 0;
+}
+
+/* Update masthead styles for better image handling */
+.masthead {
+  background: var(--color-dimmed);
+  display: inherit;
+  gap: inherit;
+  grid-column: full;
+  grid-template-columns: inherit;
+  padding: 4em 0;
+  text-align: center;
+}
+
+.masthead > img {
+  border: 4px solid var(--color-primary);
+  border-radius: 50%;
+  margin: 0 auto;
+  max-width: 12em;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+@media (min-width: 48em) {
+  .masthead {
+    text-align: inherit;
+    padding: 3em 0;
+  }
+
+  .masthead > img {
+    border-width: 6px;
+    grid-column: side;
+    grid-row: span 3;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .masthead > div,
+  .masthead > article,
+  .masthead > ul {
+    grid-column: content;
+  }
+
+  .masthead > div {
+    margin-top: 1em;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 90em) { /* 1440px */
+  :root {
+    /* Increase base font size for better readability on large screens */
+    font-size: 16px;
+  }
+
+  json-resume {
+    grid-template-columns:
+      [full-start] 1fr
+      [side-start] 16em
+      [main-start] minmax(min-content, 60em)
+      [main-end] 1fr
+      [full-end];
+    max-width: 120em;
+    margin: 0 auto 4em;
+  }
+
+  /* Two-column layout for skills and interests */
+  #skills .grid-list,
+  #interests .grid-list {
+    grid-template-columns: repeat(auto-fit, minmax(calc((100% - 2em)/3), 1fr));
+    gap: 2em;
+  }
+
+  /* Wider spacing for better visual hierarchy */
+  .stack {
+    gap: 2em;
+  }
+
+  /* Larger image for better visibility */
+  .masthead > img {
+    max-width: 14em;
+  }
+
+  /* More generous padding */
+  .masthead {
+    padding: 4em 0;
+  }
+
+  .expandable-header {
+    padding: 1.5em;
+  }
+
+  .expandable-content {
+    padding: 0 1.5em 1.5em;
+  }
+
+  /* Two-column references layout */
+  #references .stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3em;
+  }
+
+  /* Improved icon list layout */
+  .icon-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    gap: 1em;
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 120em) { /* 1920px */
+  :root {
+    font-size: 18px;
+  }
+
+  json-resume {
+    grid-template-columns:
+      [full-start] 1fr
+      [side-start] 20em
+      [main-start] minmax(min-content, 72em)
+      [main-end] 1fr
+      [full-end];
+  }
+
+  /* Three-column layout for skills and interests */
+  #skills .grid-list,
+  #interests .grid-list {
+    grid-template-columns: repeat(auto-fit, minmax(calc((100% - 3em)/4), 1fr));
+  }
+
+  /* Three-column references layout */
+  #references .stack {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Section styles */
+section {
+  margin-top: 2em;
+  position: relative;
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
+}
+
+section:first-child {
+  margin-top: 0;
+}
+
+/* Section content alignment */
+section > h3 {
+  color: var(--color-secondary);
+  font-size: var(--scale3);
+  grid-column: side;
+  text-align: right;
+  padding: 0.5em 2em 0.5em 1em;
+  position: sticky;
+  top: 0;
+  background: var(--color-background);
+  margin: 0;
+  scroll-snap-stop: always;
+}
+
+/* Add consistent padding for all section content */
+section > .stack,
+section > .grid-list {
+  padding: 0.5em 0;
+}
+
+/* Match expandable header padding */
+section > .stack h4,
+section > .grid-list h4 {
+  padding: 0.5em 0;
+  margin: 0;
+}
+
+/* Remove extra padding from expandable sections */
+section > .stack > .expandable {
+  padding: 0;
+}
+
+.expandable-header {
+  padding: 1em;
+}
+
+/* Remove duplicate padding from grid lists */
+.grid-list > div {
+  padding: 0;
+}
+
+.grid-list h4 {
+  margin-bottom: 0.5em;
+}
+
+@media (min-width: 48em) {
+  section {
+    display: contents;
+  }
+
+  section > h3 {
+    position: sticky;
+    top: 1em;
+    height: fit-content;
+  }
+
+  section > *:not(h3) {
+    grid-column: main;
+  }
+
+  json-resume {
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [side-start] 12em
+      [side-end main-start] minmax(min-content, 48em)
+      [main-end] minmax(1em, 1fr)
+      [full-end];
+  }
+}
+
+/* Base mobile styles for section titles */
+section > h3 {
+  color: var(--color-secondary);
+  font-size: var(--scale3);
+  grid-column: side;
+  text-align: left;
+  padding: 0.5em 1em;
+  position: sticky;
+  top: 0;
+  background: var(--color-background);
+  margin: 0;
+}
+
+/* Desktop adjustments */
+@media (min-width: 48em) {
+  section > h3 {
+    text-align: right;
+    padding: 0.5em 2em 0.5em 1em;
+    top: 1em;
+  }
+}
+
+/* Remove scroll margin on mobile */
+section {
+  margin-top: 2em;
+  position: relative;
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
+}
+
+/* Add scroll margin back for desktop */
+@media (min-width: 48em) {
+  section {
+    scroll-margin-top: 1em;
+  }
 }

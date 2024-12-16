@@ -1,78 +1,68 @@
 import './sections/resume-header.element.js';
 import './sections/resume-about.element.js';
 import './sections/resume-skills.element.js';
-import './sections/resume-summary.element.js';
 import './sections/resume-experiences.element.js';
-import './sections/resume-references.element.js';
-import './sections/resume-projects.element.js';
 import './sections/resume-education.element.js';
-import './sections/resume-interests.element.js';
-import './sections/resume-volunteer.element.js';
+import './sections/resume-projects.element.js';
 import './sections/resume-awards.element.js';
+import './sections/resume-volunteer.element.js';
+import './sections/resume-references.element.js';
+import './sections/resume-interests.element.js';
+import './components/time-duration.element.js';
 
-import clsx from 'clsx';
-
-import { json, styles } from './helpers.js';
-
-const shouldUseTailoredResume = import.meta.env.VITE_USE_TAILORED_RESUME;
-
-const resume = await (async () => {
-  const baseUrl = `${new URL(
-    import.meta.env.BASE_URL,
-    new URL(import.meta.url).origin,
-  ).toString()}/`;
-  if (shouldUseTailoredResume) {
-    return fetch(new URL('resume.tailored.json', baseUrl));
+class JsonResumeElement extends HTMLElement {
+  async connectedCallback() {
+    const resumeData = await this.fetchResumeData();
+    this.setupMetaTags(resumeData);
+    this.render(resumeData);
   }
-  return fetch(new URL('resume.base.json', baseUrl));
-})().then(resp => resp.json());
 
-class JsonResumeElement extends styles.withInjectedStyles(HTMLElement)({
-  mode: 'open',
-}) {
-  connectedCallback() {
-    const highlightedSkills = resume.meta?.highlightedKeywords ?? [],
-      linkedInLink = resume.basics.profiles.find(
-        profile => profile.network.toLowerCase() === 'linkedin',
-      )?.url;
-    const template = document.createElement('template');
-    // language=html
-    template.innerHTML = `
-            <main
-                class="${clsx('tw-container tw-mx-auto tw-my-2 tw-rounded-md tw-border-t-4 tw-border-t-primary tw-bg-gray-50 tw-px-1 md:tw-px-4 print:tw-my-0')}">
-                <resume-header data='${json.withQuoteEscape(JSON.stringify)(resume.basics)}'></resume-header>
+  escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 
-                <section class="${clsx('tw-grid tw-gap-2 md:tw-grid-cols-[16rem_minmax(0,1fr)] md:tw-gap-8 ')}">
-                    <div class="${clsx('tw-flex tw-flex-col tw-gap-3')}">
-                        <resume-about data='${json.withQuoteEscape(JSON.stringify)(resume.basics)}'></resume-about>
-                        <resume-skills skills='${json.withQuoteEscape(JSON.stringify)(resume.skills)}'
-                                       languages='${json.withQuoteEscape(JSON.stringify)(resume.languages)}'
-                                       highlighted-skills='${json.withQuoteEscape(JSON.stringify)(highlightedSkills)}'
-                        ></resume-skills>
-                        <resume-interests interests='${json.withQuoteEscape(JSON.stringify)(resume.interests)}'></resume-interests>
-                        <resume-awards awards='${json.withQuoteEscape(JSON.stringify)(resume.awards)}'></resume-awards>
-                    </div>
-                    <div class="${clsx('tw-flex tw-flex-col tw-gap-3 md:tw-border-l md:tw-border-primary md:tw-pl-4')}">
-                        <resume-summary
-                            summary='${json.withQuoteEscape(JSON.stringify)(resume.basics.summary)}'></resume-summary>
-                        <resume-experiences works='${json.withQuoteEscape(JSON.stringify)(resume.work)}'
-                                            skills='${JSON.stringify(resume.skills)}'
-                                            highlighted-skills='${json.withQuoteEscape(JSON.stringify)(highlightedSkills)}'
-                        ></resume-experiences>
-                        <resume-volunteer volunteer='${json.withQuoteEscape(JSON.stringify)(resume.volunteer)}'></resume-volunteer>
-                        <resume-references references='${json.withQuoteEscape(JSON.stringify)(resume.references)}'
-                                           linkedin-link="${linkedInLink}"></resume-references>
-                        <resume-projects projects='${json.withQuoteEscape(JSON.stringify)(resume.projects)}'
-                                         skills='${json.withQuoteEscape(JSON.stringify)(resume.skills)}'
-                                         highlighted-skills='${json.withQuoteEscape(JSON.stringify)(highlightedSkills)}'
-                        ></resume-projects>
-                        <resume-education
-                            educations='${json.withQuoteEscape(JSON.stringify)(resume.education)}'></resume-education>
-                    </div>
-                </section>
-            </main>`;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  async fetchResumeData() {
+    const baseUrl = new URL(
+      import.meta.env.BASE_URL,
+      window.location.origin,
+    ).toString();
+    const response = await fetch(new URL('resume.base.json', baseUrl));
+    return response.json();
+  }
+
+  render(resumeData) {
+    this.innerHTML = `
+      <resume-header data='${this.safeStringify(resumeData.basics)}'></resume-header>
+      <resume-experiences works='${this.safeStringify(resumeData.work || [])}'></resume-experiences>
+      <resume-volunteer volunteer='${this.safeStringify(resumeData.volunteer || [])}'></resume-volunteer>
+      <resume-education educations='${this.safeStringify(resumeData.education || [])}'></resume-education>
+      <resume-projects projects='${this.safeStringify(resumeData.projects || [])}'></resume-projects>
+      <resume-awards awards='${this.safeStringify(resumeData.awards || [])}'></resume-awards>
+      <resume-skills
+        skills='${this.safeStringify(resumeData.skills || [])}'
+        languages='${this.safeStringify(resumeData.languages || [])}'
+      ></resume-skills>
+      <resume-interests interests='${this.safeStringify(resumeData.interests || [])}'></resume-interests>
+      <resume-references references='${this.safeStringify(resumeData.references || [])}'></resume-references>
+    `;
+  }
+
+  safeStringify(obj) {
+    return this.escapeHtml(JSON.stringify(obj));
+  }
+
+  setupMetaTags(resumeData) {
+    document.title = resumeData.basics.name;
+
+    const metaDescription = document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.setAttribute('content', resumeData.basics.summary);
+    document.head.appendChild(metaDescription);
   }
 }
-
 customElements.define('json-resume', JsonResumeElement);

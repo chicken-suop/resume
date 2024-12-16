@@ -4,9 +4,8 @@ import path from 'node:path';
 import * as resumeToPdf from './resume-to-pdf.js';
 import { PUBLIC_ASSETS_FOLDER } from './workspace.js';
 
-const useTailoredResume = process.env['VITE_USE_TAILORED_RESUME']
-  ? true
-  : false;
+const useTailoredResume = process.env['VITE_USE_TAILORED_RESUME'] === 'true';
+
 const resumePDFPath = useTailoredResume
   ? path.join(
       PUBLIC_ASSETS_FOLDER,
@@ -22,7 +21,8 @@ const resumePDFPath = useTailoredResume
   : path.join(PUBLIC_ASSETS_FOLDER, '/resume.pdf');
 
 await resumeToPdf.generateResumeToPDF(resumePDFPath, {
-  useTailoredResume: useTailoredResume,
+  useTailoredResume,
 });
+
 // eslint-disable-next-line no-console
 console.log(`Check ${resumePDFPath} for the result.`);

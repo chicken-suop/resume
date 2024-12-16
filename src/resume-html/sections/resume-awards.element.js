@@ -1,32 +1,34 @@
-import clsx from 'clsx';
-
-import { date, styles } from '../helpers.js';
-
-class ResumeAwardsElement extends styles.withInjectedStyles(HTMLElement)({
-  mode: 'open',
-}) {
+class ResumeAwardsElement extends HTMLElement {
   connectedCallback() {
     const awards = JSON.parse(this.attributes.awards.value);
-    const template = document.createElement('template');
-    template.innerHTML = `
-<section class="${clsx('print:tw-break-inside-avoid')}">
-<header class="${clsx('tw-mb-1.5 tw-text-3xl tw-font-black')}">Awards</header>
-<ul class="${clsx('tw-flex tw-flex-col tw-gap-2')}">
-${awards
-  .map(
-    ({ date: awardDate, title }) => `
-  <li class="${clsx('tw-flex tw-flex-col tw-gap-1')}">
-    <div class="${clsx('tw-flex tw-items-center tw-justify-between')}">
-      <p class="${clsx('tw-text-xl tw-font-medium tw-text-primary')}">${title}</p>
-      <p class="${clsx('tw-text-base tw-font-medium tw-text-gray-600')}">${date.formatDate(awardDate)}</p>
-    </div>
-  </li>
-`,
-  )
-  .join('\n')}
-</ul>
-</section>`;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.innerHTML = `
+      ${
+        awards.length
+          ? `
+        <section id="awards">
+          <h3>Awards</h3>
+          <div class="stack">
+            ${awards
+              .map(
+                award => `
+              <article>
+                <header>
+                  <h4>${award.title}</h4>
+                  <div class="meta">
+                    ${award.awarder ? `<div>Awarded by <strong>${award.awarder}</strong></div>` : ''}
+                    <time datetime="${award.date}">${award.date}</time>
+                  </div>
+                </header>
+                ${award.summary ? `<p>${award.summary}</p>` : ''}
+              </article>
+            `,
+              )
+              .join('')}
+          </div>
+        </section>
+      `
+          : ''
+      }`;
   }
 }
 
