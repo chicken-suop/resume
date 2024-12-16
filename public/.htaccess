@@ -1,0 +1,19 @@
+# Proper MIME type for JavaScript modules
+AddType application/javascript .js
+AddType text/css .css
+AddType application/json .json
+
+# CORS headers for JavaScript modules
+<FilesMatch "\.(js)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+# Rewrite rules for SPA
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>

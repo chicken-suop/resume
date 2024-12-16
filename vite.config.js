@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig(({ mode }) => {
-  const base = mode === 'development' ? '/' : '/resume/';
+  const base = mode === 'development' ? '/' : '/';
 
   return {
     base,

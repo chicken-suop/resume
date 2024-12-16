@@ -27,12 +27,10 @@ class JsonResumeElement extends HTMLElement {
   }
 
   async fetchResumeData() {
-    const baseUrl = new URL(
-      import.meta.env.BASE_URL,
-      window.location.origin,
-    ).toString();
-    const cleanBaseUrl = baseUrl.replace(/([^:]\/)\/+/g, '$1');
-    const response = await fetch(new URL('resume.base.json', cleanBaseUrl));
+    const response = await fetch('/resume.base.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     return response.json();
   }
 
