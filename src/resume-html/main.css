@@ -941,3 +941,28 @@ section {
     hyphens: auto;
   }
 }
+
+/* Add these styles to the existing CSS file */
+
+.tag-list a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+}
+
+.tag-list a:hover {
+  color: var(--color-accent);
+}
+
+.tag-list a::after {
+  content: "📚";
+  display: inline-block;
+  margin-left: 0.3em;
+  font-size: 0.9em;
+}
+
+@media print {
+  .tag-list a::after {
+    display: none;
+  }
+}

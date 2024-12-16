@@ -60,7 +60,7 @@
         "username": "elliot-schep"
       }
     ],
-    "summary": "Senior Full-stack Engineer with 6 years of experience in full-stack development. I am an independent, self-directed learner. I've worked mostly at startups so I am used to wearing many hats. Lived in Europe for 10 years, born in Australia",
+    "summary": "Senior Full-stack Engineer with six years of experience in full-stack development. Australian born, I am an independent, self-directed learner. Having mostly worked at StartUps, I am well versed in working many different roles. I lived in Europe for ten years",
     "website": "https://chicken-suop.github.io/resume"
   },
   "education": [
@@ -94,8 +94,8 @@
     },
     {
       "keywords": [
-        "The Phoenix Project/The Unicorn Project",
-        "Clean Series",
+        "The Phoenix Project",
+        "Clean Code",
         "The Software Craftsman",
         "Pragmatic Programmer",
         "The Art of Unit Testing",
@@ -119,14 +119,14 @@
       "date": "2021-08-11",
       "name": "Santosh Prasad Sah",
       "position": "Sr. Go/GoLang Engineer",
-      "reference": "It was really great working with Elliot in Rebel Software Ltd. He used his design skills to modify and create new pages for Voom CRM. He is team player and always strive to improve design. I wish him best of luck"
+      "reference": "It was really great working with Elliot in Rebel Software Ltd. He used his design skills to modify and create new pages for Voom CRM. He is a team player and always strives to improve design. I wish him best of luck"
     },
     {
       "company": "Amartus",
       "date": "2020-09-07",
       "name": "Adam Lach",
       "position": "Java Software Engineer",
-      "reference": "Elliot is a highly motivated UI developer, always focused on improvements and possibilities. He introduced many new ideas to UI solutions on both levels: business(UX) and technical(frameworks). Elliot is a relatively young developer but I think that with his level of motivation and potential he can be a very mature developer in a short time."
+      "reference": "Elliot is a highly motivated UI developer, always focused on improvements and possibilities. He introduced many new ideas to UI solutions on both levels: business (UX) and technical (frameworks). Elliot is a relatively young developer but I think that with his level of motivation and potential he can be a very mature developer in a short time."
     }
   ],
   "skills": [
@@ -244,7 +244,7 @@
       "location": "Melbourne, Australia (remote)",
       "position": "Senior full-stack engineer (Contract)",
       "startDate": "2024-02-20",
-      "summary": "Worked on modernisation of an in-house ERP system, transitioning it to a contemporary tech stack. Due to a highly restrictive NDA, detailed project specifics cannot be disclosed",
+      "summary": "Worked on modernisation of an in-house ERP system, transitioning it to a contemporary tech stack. Detailed project specifics are bound by NDA and cannot be disclosed",
       "url": "https://www.ausproof.com.au/"
     },
     {
@@ -252,17 +252,17 @@
       "endDate": "2022-12-30",
       "highlights": [
         "Led a team of 5 developers and 4 QA testers as team lead and senior full-stack engineer",
-        "Mentored multiple junior developers, fostering career growth",
-        "Played an active role in hiring, including interviewing and selecting developers",
-        "Specialized in enhancing graphic editor technology and managing a complex codebase",
-        "Implemented strategies like automated testing, modularization, decoupling, and software design patterns to improve reliability and quality",
+        "Mentored 4 junior developers, fostering career growth",
+        "Actively involved in interviewing, selecting, and hiring developers",
+        "Specialised in enhancing graphic editor technology and managing a complex codebase",
+        "Implemented strategies like automated testing, modularisation, decoupling, and software design patterns to improve reliability and quality",
         "Collaborated with cross-functional teams to deliver high-quality features",
-        "Contributed to forums and discussions to refine processes, tools, and development practices"
+        "Creator of and key contributor to forums and discussions to refine processes, tools, and development practices"
       ],
       "location": "Gold Coast, Australia",
       "position": "Team lead, senior full-stack engineer (Contract)",
       "startDate": "2020-10-01",
-      "summary": "Led the main product team as a senior full-stack engineer, specializing in advancing graphic editor technology while mentoring junior developers, improving processes, and enhancing application quality and reliability",
+      "summary": "Led the main product team as a senior full-stack engineer, specialising in advancing graphic editor technology while mentoring junior developers, improving processes, and enhancing application quality and reliability",
       "url": "https://desygner.com/"
     },
     {
@@ -289,12 +289,12 @@
         "Designed and developed websites, apps, and tools for Rebel's CRM/management software, 'Voom', and third-party clients",
         "Worked on Software as a Service (SaaS) applications",
         "Developed and maintained a hosted application on AWS infrastructure",
-        "Collaborated on a system powered by a cluster of services, utilizing Go for backend development"
+        "Collaborated on a system powered by a cluster of services, utilising Go for backend development"
       ],
       "location": "Krakow, Poland",
       "position": "Frontend Developer (Contract)",
       "startDate": "2017-11-01",
-      "summary": "Led the frontend development at Rebel Software, revitalizing a 3+ year old custom CRM into a production-ready system for multiple clients",
+      "summary": "Led the frontend development at Rebel Software, revitalising a 3+ year old custom CRM into a production-ready system for multiple clients",
       "url": "https://www.rebel.agency/"
     },
     {
@@ -304,7 +304,7 @@
         "Open-source contributions to ERPNext, including plugin development",
         "Designed and developed websites with various CMS platforms:",
         "diversityhub.pl: Built with OctoberCMS in collaboration with another developer",
-        "KLG Properties: Worked with two developers on theme customization",
+        "KLG Properties: Worked with two developers on theme customisation",
         "Automated parsing of real estate data into a database and file system using Python"
       ],
       "location": "Krakow, Poland",
@@ -318,16 +318,16 @@
       "endDate": "2018-04-30",
       "highlights": [
         "Created website apps and admin tools for inventory and site management",
-        "Developed a CMS specifically for the jewelry industry, featuring an intuitive website creator",
-        "Designed and implemented a drag-and-drop page creator for easy customization",
+        "Developed a CMS specifically for the jewellery industry, featuring an intuitive website creator",
+        "Designed and implemented a drag-and-drop page creator for easy customisation",
         "Built tools for updating specific parts of the CMS using React",
         "Worked primarily with React and Django for development"
       ],
       "location": "Krakow, Poland",
       "position": "Full-stack Developer (Contract)",
       "startDate": "2018-01-01",
-      "summary": "Designed and developed apps and admin tools, including a CMS tailored for the jewelry industry, with a focus on inventory and site management",
-      "url": "https://amartus.com/nbrace/"
+      "summary": "Designed and developed apps and admin tools, including a CMS tailored for the jewellery industry, with a focus on inventory and site management",
+      "url": "https://www.thinkspacehq.com/"
     }
   ]
 }
