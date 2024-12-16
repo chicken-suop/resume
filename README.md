@@ -1,6 +1,6 @@
 # Elliot Schep's Resume
 
-[![deploy-github-page-after-push-master](https://github.com/chicken-suop/resume.json/actions/workflows/deploy-gh-page.yml/badge.svg)](https://github.com/chicken-suop/resume.json/actions/workflows/deploy-gh-page.yml)
+[![deploy-github-page-after-push-master](https://github.com/chicken-suop/resume/actions/workflows/deploy-gh-page.yml/badge.svg)](https://github.com/chicken-suop/resume/actions/workflows/deploy-gh-page.yml)
 
 Personal resume built with JSON Resume schema.
 
@@ -35,9 +35,9 @@ after that you will see `resume.pdf` in `public/` folder
 
 ### if you're watching this then I suggest you read web version
 
-[WEB version](https://chicken-suop.github.io/resume.json/)
+[WEB version](https://chicken-suop.github.io/resume/)
 
-[PDF Version](https://chicken-suop.github.io/resume.json/resume.pdf)
+[PDF Version](https://chicken-suop.github.io/resume/resume.pdf)
 
 ## Skill Level Definitions
 

@@ -34,10 +34,10 @@
     "yarn": "Use npm"
   },
   "license": "MIT",
-  "main": "resume.json",
+  "main": "resume",
   "name": "elliot-schep-resume",
   "private": true,
-  "repository": "git@github.com:chicken-suop/resume.json.git",
+  "repository": "git@github.com:chicken-suop/resume.git",
   "scripts": {
     "prepare": "is-ci || husky"
   },
