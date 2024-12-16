@@ -132,18 +132,26 @@
   "skills": [
     {
       "keywords": [
-        "HTML / JSX",
-        "SCSS / CSS / BEM / Styled Components",
-        "Javascript / Typescript",
-        "React / Next",
-        "Redux / Apollo"
+        "HTML",
+        "JSX",
+        "SCSS",
+        "CSS",
+        "BEM",
+        "Styled Components",
+        "Javascript",
+        "Typescript",
+        "React",
+        "Next.js",
+        "Redux",
+        "Apollo"
       ],
       "level": "Senior",
       "name": "Frontend"
     },
     {
       "keywords": [
-        "Node / Bun",
+        "Node.js",
+        "Bun",
         "Ruby",
         "Python",
         "Postgres",
@@ -156,7 +164,7 @@
     {
       "keywords": [
         "AWS",
-        "G Cloud",
+        "Google Cloud",
         "Heroku",
         "Caching",
         "Cisco NSO",
@@ -189,11 +197,17 @@
     {
       "keywords": [
         "Testcontainers",
-        "System tests",
-        "Mockserver",
-        "Contract testing",
-        "Narrow & Wide integration tests",
-        "Jest/Cypress/Mocha/Jasmine/Playwright/Puppeteer/Karma/etc"
+        "System Testing",
+        "Mock Server",
+        "Contract Testing",
+        "Integration Testing",
+        "Jest",
+        "Cypress",
+        "Mocha",
+        "Jasmine",
+        "Playwright",
+        "Puppeteer",
+        "Karma"
       ],
       "level": "Senior",
       "name": "Testing"

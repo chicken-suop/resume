@@ -130,6 +130,7 @@ li::marker, .network {
   gap: 0.4em;
   list-style: none;
   padding: 0;
+  max-width: 100%;
 }
 
 .tag-list > li {
@@ -909,5 +910,34 @@ section {
     max-width: 100vw;
     padding: 0 1em 1em;
     word-break: break-word;
+  }
+
+  /* Add grid-list container constraints */
+  .grid-list {
+    grid-template-columns: 1fr;
+    padding: 0 1em;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Add skill section specific adjustments */
+  #skills .grid-list > div {
+    max-width: 100%;
+    padding-right: 1em;
+    box-sizing: border-box;
+  }
+
+  /* Ensure tags don't overflow */
+  .tag-list {
+    margin-right: -0.4em; /* Compensate for the gap */
+  }
+
+  .tag-list > li {
+    max-width: calc(100% - 0.4em); /* Account for gap */
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 }
