@@ -31,7 +31,8 @@ class JsonResumeElement extends HTMLElement {
       import.meta.env.BASE_URL,
       window.location.origin,
     ).toString();
-    const response = await fetch(new URL('resume.base.json', baseUrl));
+    const cleanBaseUrl = baseUrl.replace(/([^:]\/)\/+/g, '$1');
+    const response = await fetch(new URL('resume.base.json', cleanBaseUrl));
     return response.json();
   }
 
