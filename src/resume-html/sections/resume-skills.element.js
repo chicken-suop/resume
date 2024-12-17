@@ -19,7 +19,10 @@ class ResumeSkillsElement extends HTMLElement {
                   skill.keywords?.length
                     ? `
                   <ul class="tag-list">
-                    ${skill.keywords.map(keyword => `<li>${keyword}</li>`).join('')}
+                    ${skill.keywords
+                      .sort((a, b) => a.length - b.length)
+                      .map(keyword => `<li>${keyword}</li>`)
+                      .join('')}
                   </ul>
                 `
                     : ''
@@ -35,7 +38,7 @@ class ResumeSkillsElement extends HTMLElement {
       }
 
       ${
-        languages.length
+        languages.length > 1
           ? `
         <section id="languages">
           <h3>Languages</h3>

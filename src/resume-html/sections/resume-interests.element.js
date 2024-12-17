@@ -33,7 +33,12 @@ class ResumeInterestsElement extends HTMLElement {
                   interest.keywords?.length
                     ? `
                   <ul class="tag-list">
-                    ${interest.keywords.map(keyword => this.renderKeyword(interest.name, keyword)).join('')}
+                    ${interest.keywords
+                      .sort((a, b) => a.length - b.length)
+                      .map(keyword =>
+                        this.renderKeyword(interest.name, keyword),
+                      )
+                      .join('')}
                   </ul>
                 `
                     : ''
