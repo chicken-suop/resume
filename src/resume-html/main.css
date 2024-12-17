@@ -25,12 +25,7 @@ json-resume {
   grid-template-rows: auto [content] 0;
   margin-bottom: 4em;
   width: 100%;
-  scroll-snap-type: y proximity;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100vh;
   position: relative;
-  -webkit-overflow-scrolling: touch;
 }
 
 json-resume:before {
@@ -936,13 +931,12 @@ section {
   /* Add skill section specific adjustments */
   #skills .grid-list > div {
     max-width: 100%;
-    padding-right: 1em;
+    margin-top: 1em;
     box-sizing: border-box;
   }
 
-  /* Ensure tags don't overflow */
   .tag-list {
-    margin-right: -0.4em; /* Compensate for the gap */
+    margin-left: 1em;
   }
 
   .tag-list > li {
@@ -954,27 +948,36 @@ section {
   }
 }
 
-/* Add these styles to the existing CSS file */
-
 .tag-list a {
   color: inherit;
   text-decoration: none;
-  position: relative;
 }
 
 .tag-list a:hover {
   color: var(--color-accent);
 }
 
-.tag-list a::after {
+.tag-list a::before {
   content: "📚";
   display: inline-block;
-  margin-left: 0.3em;
+  margin-right: 0.5em;
   font-size: 0.9em;
 }
 
 @media print {
-  .tag-list a::after {
+  .tag-list a::before {
     display: none;
   }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }

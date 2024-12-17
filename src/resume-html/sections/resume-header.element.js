@@ -73,8 +73,7 @@ class ResumeHeaderElement extends HTMLElement {
                 profile => `
             <li>
               ${this.getProfileIcon(profile.network)}
-              <a href="${profile.url}">${profile.username}</a>
-              <span class="network">(${profile.network})</span>
+              <a href="${profile.url}">${profile.network}</a>
             </li>
           `,
               )

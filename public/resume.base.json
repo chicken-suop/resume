@@ -46,18 +46,15 @@
     "profiles": [
       {
         "network": "GitHub",
-        "url": "https://github.com/chicken-suop/",
-        "username": "chicken-suop"
+        "url": "https://github.com/chicken-suop/"
       },
       {
         "network": "Stack Overflow",
-        "url": "https://stackoverflow.com/users/7304372/",
-        "username": "dǝɥɔS ʇoıןןƎ"
+        "url": "https://stackoverflow.com/users/7304372/"
       },
       {
         "network": "LinkedIn",
-        "url": "https://www.linkedin.com/in/elliot-schep/",
-        "username": "elliot-schep"
+        "url": "https://www.linkedin.com/in/elliot-schep/"
       }
     ],
     "summary": "Senior Full-stack Engineer with six years of experience in full-stack development. Australian born, I am an independent, self-directed learner. Having mostly worked at StartUps, I am well versed in working many different roles. I lived in Europe for ten years",
