@@ -521,7 +521,7 @@ section > .stack .expandable-header h4 {
     gap: 0.3em;
   }
 
-  .expandable-header h4 .company {
+  .expandable-header h4 .position {
     font-size: 1.2em;
   }
 }
