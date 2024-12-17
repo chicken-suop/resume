@@ -5,6 +5,13 @@ export function setupExpandables(element) {
     header.addEventListener('click', () => {
       const isExpanded = expandable.classList.toggle('expanded');
       header.setAttribute('aria-expanded', isExpanded);
+
+      // Toggle print button visibility on mobile
+      const printButton = document.querySelector('.print-button');
+      if (printButton && window.innerWidth < 768) {
+        // 48em = 768px
+        printButton.classList.toggle('hide-on-mobile', isExpanded);
+      }
     });
   });
 }
