@@ -477,41 +477,53 @@ resume-header {
   color: var(--color-accent);
 }
 
-/* Update h4 styles for better alignment */
-.expandable-header h4 {
-  display: inline-flex;
-  align-items: center;
-  margin: 0;
-  line-height: 1;
-}
-
-/* Update header preview styles */
 .expandable-header > div {
   flex: 1;
 }
 
-.expandable-header h4 {
-  display: inline-flex;
-  align-items: center;
+section > .stack .expandable-header h4 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
   margin: 0;
-  line-height: 1.2;
+  padding: 0;
+}
+
+.expandable-header h4 .position {
   color: var(--color-primary);
+  font-size: 1.1em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  order: 0;
+}
+
+.expandable-header h4 .company {
+  color: var(--color-secondary);
+  font-size: 0.7em;
+  font-weight: normal;
+  order: 1;
 }
 
 .expandable-header .meta {
-  margin-top: 0.3em;
+  margin-top: 0.4em;
   font-size: 0.9em;
+  color: var(--color-secondary);
 }
 
 .expandable-header strong {
-  display: block;
-  color: var(--color-primary);
-  font-weight: normal;
+  display: none;
 }
 
-/* Adjust spacing in expanded content */
-.expandable-content .meta:first-child {
-  margin-top: 0;
+@media (min-width: 48em) {
+  .expandable-header h4 {
+    gap: 0.3em;
+  }
+
+  .expandable-header h4 .company {
+    font-size: 1.2em;
+  }
 }
 
 /* Update masthead styles for better image handling */

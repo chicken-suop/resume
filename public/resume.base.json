@@ -242,13 +242,13 @@
         "Collaborated with cross-functional teams to align technical solutions with business requirements and ensure compliance with industry standards"
       ],
       "location": "Melbourne, Australia (remote)",
-      "position": "Senior full-stack engineer (Contract)",
+      "position": "Senior full-stack engineer",
       "startDate": "2024-02-20",
-      "summary": "Worked on modernisation of an in-house ERP system, transitioning it to a contemporary tech stack. Detailed project specifics are bound by NDA and cannot be disclosed",
+      "summary": "(Contract) Worked on modernisation of an in-house ERP system, transitioning it to a contemporary tech stack. Detailed project specifics are bound by NDA and cannot be disclosed",
       "url": "https://www.ausproof.com.au/"
     },
     {
-      "company": "Desygner",
+      "company": "Desygner Pty Ltd",
       "endDate": "2022-12-30",
       "highlights": [
         "Led a team of 5 developers and 4 QA testers as team lead and senior full-stack engineer",
@@ -260,13 +260,13 @@
         "Creator of and key contributor to forums and discussions to refine processes, tools, and development practices"
       ],
       "location": "Gold Coast, Australia",
-      "position": "Team lead, senior full-stack engineer (Contract)",
+      "position": "Team Leader",
       "startDate": "2020-10-01",
-      "summary": "Led the main product team as a senior full-stack engineer, specialising in advancing graphic editor technology while mentoring junior developers, improving processes, and enhancing application quality and reliability",
+      "summary": "(Contract) Led the main product team as a senior full-stack engineer, specialising in advancing graphic editor technology while mentoring junior developers, improving processes, and enhancing application quality and reliability",
       "url": "https://desygner.com/"
     },
     {
-      "company": "Amartus",
+      "company": "Amartus Polska Sp. z o.o.",
       "endDate": "2020-06-01",
       "highlights": [
         "2020: Lead Frontend Developer for the Inter-Provider Service Automation Platform, nBrace",
@@ -278,11 +278,11 @@
       "location": "Krakow, Poland",
       "position": "Lead Frontend Engineer",
       "startDate": "2019-02-01",
-      "summary": "Led frontend development for the nBrace platform and contributed to Itential’s network automation projects, focusing on enhancing infrastructure transparency and automation",
+      "summary": "(Employment) Led frontend development for the nBrace platform and contributed to Itential’s network automation projects, focusing on enhancing infrastructure transparency and automation",
       "url": "https://amartus.com/nbrace/"
     },
     {
-      "company": "Rebel Software",
+      "company": "Rebel Agency Ltd.",
       "endDate": "2018-12-01",
       "highlights": [
         "Improved user satisfaction by enhancing CRM usability",
@@ -292,13 +292,13 @@
         "Collaborated on a system powered by a cluster of services, utilising Go for backend development"
       ],
       "location": "Krakow, Poland",
-      "position": "Frontend Developer (Contract)",
+      "position": "Frontend Developer",
       "startDate": "2017-11-01",
-      "summary": "Led the frontend development at Rebel Software, revitalising a 3+ year old custom CRM into a production-ready system for multiple clients",
+      "summary": "(Contract) Led the frontend development at Rebel Software, revitalising a 3+ year old custom CRM into a production-ready system for multiple clients",
       "url": "https://www.rebel.agency/"
     },
     {
-      "company": "Maxima Consulting",
+      "company": "Maxima Consulting, Inc",
       "endDate": "2018-05-01",
       "highlights": [
         "Open-source contributions to ERPNext, including plugin development",
@@ -308,13 +308,13 @@
         "Automated parsing of real estate data into a database and file system using Python"
       ],
       "location": "Krakow, Poland",
-      "position": "Frontend Developer (Internship)",
+      "position": "Frontend Developer",
       "startDate": "2017-01-01",
-      "summary": "Contributed to open-source ERP and developed websites using multiple CMS platforms, along with a Python-based data importer/exporter for real estate automation",
+      "summary": "(Internship) Contributed to open-source ERP and developed websites using multiple CMS platforms, along with a Python-based data importer/exporter for real estate automation",
       "url": "https://www.maximaconsulting.com/"
     },
     {
-      "company": "Thinkspace Jeweler",
+      "company": "Thinkspace",
       "endDate": "2018-04-30",
       "highlights": [
         "Created website apps and admin tools for inventory and site management",
@@ -324,9 +324,9 @@
         "Worked primarily with React and Django for development"
       ],
       "location": "Krakow, Poland",
-      "position": "Full-stack Developer (Contract)",
+      "position": "Full-stack Developer",
       "startDate": "2018-01-01",
-      "summary": "Designed and developed apps and admin tools, including a CMS tailored for the jewellery industry, with a focus on inventory and site management",
+      "summary": "(Contract) Designed and developed apps and admin tools, including a CMS tailored for the jewellery industry, with a focus on inventory and site management",
       "url": "https://www.thinkspacehq.com/"
     }
   ]
