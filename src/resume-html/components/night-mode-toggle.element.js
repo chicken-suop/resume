@@ -44,6 +44,26 @@ class NightModeToggleElement extends HTMLElement {
     this.applyTheme();
   }
 
+  createSmoothTransition() {
+    const root = document.documentElement;
+
+    // Add a smooth transition for all color-related properties
+    root.style.setProperty(
+      '--transition-theme',
+      'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    );
+
+    // Apply the transition to key elements
+    document.body.style.transition =
+      'background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+
+    // Apply theme changes
+    this.isDarkMode = !this.isDarkMode;
+    this.updateToggle();
+    this.applyTheme();
+    this.saveThemePreference();
+  }
+
   loadThemePreference() {
     const savedTheme = localStorage.getItem('resume-theme');
     const systemPrefersDark = window.matchMedia(
@@ -328,16 +348,16 @@ class NightModeToggleElement extends HTMLElement {
     if (this.isAnimating) return;
 
     this.isAnimating = true;
-    this.isDarkMode = !this.isDarkMode;
 
-    this.updateToggle();
-    this.applyTheme();
-    this.saveThemePreference();
+    // Create smooth transition
+    this.createSmoothTransition();
 
-    // Reset animation lock
+    // Clean up after animation completes
     setTimeout(() => {
+      document.body.style.transition = '';
+      document.documentElement.style.removeProperty('--transition-theme');
       this.isAnimating = false;
-    }, 100);
+    }, 300);
   }
 
   updateToggle() {

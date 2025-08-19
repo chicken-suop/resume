@@ -8,7 +8,6 @@
 #references .reference-content {
   border-left: 0.2em solid var(--color-dimmed);
   padding-left: 1.5em;
-  transition: var(--transition-theme);
 }
 
 #references blockquote p {
@@ -28,13 +27,11 @@
   font-style: normal;
   line-height: 1.5;
   margin: 0;
-  transition: var(--transition-theme);
 }
 
 #references cite time {
   color: var(--color-secondary);
   font-size: 0.9em;
-  transition: var(--transition-theme);
 }
 
 /* References section styles */

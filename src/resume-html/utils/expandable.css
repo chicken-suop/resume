@@ -103,7 +103,6 @@ section > .stack .expandable-header h4 {
   align-items: center;
   gap: 0.3em;
   order: 0;
-  transition: var(--transition-theme);
 }
 
 .expandable-header h4 .company {
@@ -111,7 +110,6 @@ section > .stack .expandable-header h4 {
   font-size: 0.7em;
   font-weight: normal;
   order: 1;
-  transition: var(--transition-theme);
 }
 
 .expandable-header .meta {
