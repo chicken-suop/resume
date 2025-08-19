@@ -7,6 +7,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Remove default browser focus outline */
+*:focus {
+  outline: none;
+}
+
 html {
   font-size: 14px;
 }
@@ -19,13 +24,14 @@ json-resume {
   row-gap: 0;
   column-gap: 2em;
   grid-template-columns:
-    [full-start] minmax(0, 1fr)
-    [main-start] minmax(0, 48em)
-    [main-end] minmax(0, 1fr)
+    [full-start] 0
+    [main-start] minmax(0, 1fr)
+    [main-end] 0
     [full-end];
   grid-template-rows: auto [content] 0;
-  margin-bottom: 4em;
+  margin-bottom: 0;
   width: 100%;
+  min-height: 100vh;
   position: relative;
   transition: var(--transition-theme);
 }
@@ -84,8 +90,8 @@ json-resume:before {
   }
   
   .masthead .icon-list li {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: transparent;
+    border-color: transparent;
   }
   
   .masthead .icon-list li:hover {
@@ -179,6 +185,13 @@ li::marker, .network {
   list-style: none;
   padding: 0;
 }
+.icon-list li,
+.icon-list a {
+  -webkit-user-drag: none;
+  -moz-user-select: text;
+  user-select: text;
+  user-drag: none;
+}
 
 /* Sections */
 .masthead > *,
@@ -222,24 +235,42 @@ section {
   pointer-events: none;
 }
 
-.masthead > img {
-  border: 4px solid var(--color-background);
-  border-radius: 50%;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--color-accent);
-  margin: 0;
+.masthead .image-container {
+  position: relative;
   width: 10em;
   height: 10em;
-  aspect-ratio: 1;
-  object-fit: cover;
-  transition: var(--transition-smooth);
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
+  margin: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.masthead > img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), 0 0 0 3px var(--color-accent);
+.masthead .image-container > img {
+  border: 4px solid var(--color-background);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 2px var(--color-accent),
+    8px 8px 0 0 rgba(0, 115, 170, 0.3),
+    16px 16px 0 0 rgba(0, 115, 170, 0.2),
+    24px 24px 0 0 rgba(0, 115, 170, 0.1);
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transition: inherit;
+  position: relative;
+  z-index: 1;
+}
+
+.masthead .image-container:hover {
+  transform: translate(-4px, -4px) scale(1.02);
+}
+
+.masthead .image-container:hover > img {
+  box-shadow: 
+    0 0 0 3px var(--color-accent),
+    12px 12px 0 0 rgba(0, 115, 170, 0.4),
+    20px 20px 0 0 rgba(0, 115, 170, 0.3),
+    28px 28px 0 0 rgba(0, 115, 170, 0.2);
 }
 
 .masthead h1 {
@@ -297,13 +328,16 @@ section {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: transparent;
   border-radius: 12px;
   padding: 0.8em 1.2em;
   transition: var(--transition-fast);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
   cursor: pointer;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 .masthead .icon-list li:hover {
@@ -313,15 +347,9 @@ section {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.masthead .icon-list li:focus-within {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: var(--color-accent);
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
 
 @media (prefers-reduced-motion: reduce) {
-  .masthead > img:hover {
+  .masthead .image-container:hover {
     transform: none;
   }
   
@@ -329,7 +357,8 @@ section {
     transform: none;
   }
   
-  .masthead > img,
+  .masthead .image-container,
+  .masthead .image-container > img,
   .masthead .icon-list li {
     transition: none;
   }
@@ -340,11 +369,22 @@ section {
   width: 1.2em;
   height: 1.2em;
   margin: 0;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
 }
 
 .masthead .icon-list a {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
 }
 
 .masthead .icon-list .network {
@@ -384,15 +424,20 @@ section {
 
 /* Other Elements */
 article > * + *,
-blockquote > * + *,
 .expandable-content > * + * {
   margin-top: 0.6em;
+}
+
+/* Override for references blockquotes to prevent extra spacing */
+#references blockquote > * + * {
+  margin-top: 0;
 }
 
 blockquote {
   border-left: 0.2em solid var(--color-dimmed);
   padding-left: 1em;
 }
+
 
 cite {
   color: var(--color-secondary);
@@ -473,21 +518,30 @@ resume-header {
   gap: 2em;
   grid-template-columns: [full-start] 1fr [main-start side-start] minmax(min-content, 12em) [side-end content-start] minmax(min-content, 36em) [main-end content-end] 1fr [full-end];
   grid-template-rows: auto [content] 0;
-  margin-bottom: 4em;
+  margin-bottom: 2em;
   width: 100%;
 }
 
 /* Add these styles for references */
 #references blockquote {
+  border-left: none;
+  padding: 0;
+  margin: 0;
+}
+
+#references .reference-content {
   border-left: 0.2em solid var(--color-dimmed);
   padding-left: 1.5em;
-  margin: 1em 0;
 }
 
 #references blockquote p {
   font-style: italic;
   line-height: 1.6;
-  margin-bottom: 1em;
+  margin: 0;
+}
+
+#references blockquote p:first-child {
+  margin-bottom: 0.5em;
 }
 
 #references cite {
@@ -496,15 +550,12 @@ resume-header {
   font-size: 0.9em;
   font-style: normal;
   line-height: 1.5;
+  margin: 0;
 }
 
 #references cite time {
   color: var(--color-secondary);
   font-size: 0.9em;
-}
-
-#references .stack {
-  gap: 2em;
 }
 
 /* Expandable sections */
@@ -698,13 +749,13 @@ section > .stack .expandable-header h4 {
 
   json-resume {
     grid-template-columns:
-      [full-start] 1fr
+      [full-start] 0
       [side-start] 16em
-      [main-start] minmax(min-content, 60em)
-      [main-end] 1fr
+      [main-start] minmax(min-content, 1fr)
+      [main-end] 0
       [full-end];
-    max-width: 120em;
-    margin: 0 auto 4em;
+    max-width: none;
+    margin: 0 0 4em;
   }
 
   /* Two-column layout for skills and interests */
@@ -760,11 +811,12 @@ section > .stack .expandable-header h4 {
 
   json-resume {
     grid-template-columns:
-      [full-start] 1fr
+      [full-start] 0
       [side-start] 20em
-      [main-start] minmax(min-content, 72em)
-      [main-end] 1fr
+      [main-start] minmax(min-content, 1fr)
+      [main-end] 0
       [full-end];
+    max-width: none;
   }
 
   /* Three-column layout for skills and interests */
@@ -781,7 +833,7 @@ section > .stack .expandable-header h4 {
 
 /* Section styles */
 section {
-  margin-top: 2em;
+  margin-top: 3em;
   position: relative;
   scroll-snap-align: start;
   scroll-margin-top: 0;
@@ -809,7 +861,7 @@ section > h3 {
 /* Add consistent padding for all section content */
 section > .stack,
 section > .grid-list {
-  padding: 0.5em 0;
+  padding: 0.8em 0;
 }
 
 /* Match expandable header padding */
@@ -854,11 +906,12 @@ section > .stack > .expandable {
 
   json-resume {
     grid-template-columns:
-      [full-start] minmax(1em, 1fr)
+      [full-start] 0
       [side-start] 12em
-      [side-end main-start] minmax(min-content, 48em)
-      [main-end] minmax(1em, 1fr)
+      [side-end main-start] minmax(min-content, 1fr)
+      [main-end] 0
       [full-end];
+    max-width: none;
   }
 }
 
@@ -886,7 +939,7 @@ section > h3 {
 
 /* Remove scroll margin on mobile */
 section {
-  margin-top: 2em;
+  margin-top: 3em;
   position: relative;
   scroll-snap-align: start;
   scroll-margin-top: 0;
@@ -903,8 +956,8 @@ section {
 #awards .grid-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 0.8em;
-  margin-top: 0.5em;
+  gap: 1em;
+  margin-top: 0.8em;
 }
 
 .award-item {
@@ -928,11 +981,12 @@ section {
 /* Make awards section more compact on larger screens */
 @media (min-width: 48em) {
   #awards {
-    margin: 0.5em 0;
+    margin: 1em 0;
   }
 
   #awards .grid-list {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.2em;
   }
 }
 
@@ -946,30 +1000,33 @@ section {
 /* References section styles */
 #references .stack {
   display: grid;
-  gap: 2em;
+  gap: 2.5em;
 }
 
 #references blockquote {
   max-width: 65ch; /* Limit line length for better readability */
+  margin: 0;
 }
 
-/* Adjust grid layout based on number of references */
-#references .stack:has(blockquote:nth-child(1):last-child),
-#references .stack:has(blockquote:nth-child(2):last-child) {
-  /* When there are 1-2 references, use single column */
+/* Mobile: Single column for all references */
+#references .stack {
   grid-template-columns: 1fr;
 }
 
-/* For 3 or more references, use multi-column layout on larger screens */
+/* Tablet/Desktop: Multi-column layout based on screen size */
 @media (min-width: 48em) {
-  #references .stack:has(blockquote:nth-child(3)) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  #references .stack {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3em;
   }
 }
 
-/* Ensure consistent spacing */
-#references blockquote {
-  margin: 0;
+/* Large screens: Better column spacing */
+@media (min-width: 90em) {
+  #references .stack {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3.5em;
+  }
 }
 
 /* Desktop header adjustments */
@@ -977,12 +1034,39 @@ section {
   .masthead {
     padding: 5em 3em;
     text-align: left;
+    display: grid;
+    grid-template-columns: 12em 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 0 4em;
+    align-items: start;
   }
 
-  .masthead > img {
+  .masthead .image-container {
     width: 12em;
     height: 12em;
     margin: 0;
+    grid-column: 1;
+    grid-row: 1 / 4;
+  }
+
+  .masthead > div {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .masthead > article {
+    grid-column: 2;
+    grid-row: 3;
+    margin: 2em 0 0;
+  }
+
+  .masthead .icon-list {
+    grid-column: 2;
+    grid-row: 4;
+    margin-top: 3em;
+    justify-content: flex-start;
+    max-width: max-content;
   }
 
   .masthead h1 {
@@ -1035,7 +1119,7 @@ section {
     text-align: center;
   }
 
-  .masthead > img {
+  .masthead .image-container {
     width: 8em;
     height: 8em;
     margin: 0 auto 1.5em;
@@ -1136,6 +1220,7 @@ section {
 html, body {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
   height: 100%;
   overflow-x: hidden;
 }
@@ -1144,7 +1229,7 @@ body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   font-family: Lato, sans-serif;
-  background: var(--color-background-light);
+  background: var(--color-background);
   margin: 0;
   padding: 0;
   width: 100%;
@@ -1153,11 +1238,6 @@ body {
   transition: var(--transition-theme);
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: var(--color-background-dark);
-  }
-}
 
 /* Print styles */
 @media print {
@@ -1292,6 +1372,11 @@ body {
     margin-right: 0.3cm;
     color: var(--color-secondary);
     flex-shrink: 0;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   /* Sections */
@@ -1625,3 +1710,4 @@ body {
   /* ... existing styles ... */
   transition: all 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
+

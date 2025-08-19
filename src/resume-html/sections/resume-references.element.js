@@ -33,8 +33,10 @@ class ResumeReferencesElement extends HTMLElement {
   renderReference(reference) {
     return `
       <blockquote>
-        <p>${reference.reference}</p>
-        ${reference.name ? this.renderCitation(reference) : ''}
+        <div class="reference-content">
+          <p>${reference.reference}</p>
+          ${reference.name ? this.renderCitation(reference) : ''}
+        </div>
       </blockquote>
     `;
   }
