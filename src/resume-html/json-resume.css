@@ -199,7 +199,7 @@ section {
 
   /* More generous padding */
   .masthead {
-    padding: 4em 0;
+    padding: 5em 3em;
   }
 
   .expandable-header {
@@ -250,6 +250,15 @@ section {
     padding: 0 1em;
   }
 
+  /* Remove padding from stack to let expandables go full width */
+  section > .stack {
+    padding: 0;
+  }
+
+  /* Add padding to non-expandable elements in stack */
+  .stack > *:not(.expandable) {
+    padding: 0 1em;
+  }
 
   /* Ensure expandable content doesn't cause horizontal scroll */
   .expandable-content {
