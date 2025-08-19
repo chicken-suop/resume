@@ -1,3 +1,5 @@
+import './projects.css';
+
 class ResumeProjectsElement extends HTMLElement {
   connectedCallback() {
     const projects = JSON.parse(this.attributes.projects.value);

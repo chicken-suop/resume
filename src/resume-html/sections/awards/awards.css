@@ -1,0 +1,44 @@
+/* Awards section specific styles */
+#awards .grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1em;
+  margin-top: 0.8em;
+}
+
+.award-item {
+  padding: 0.4em 0 0.4em 0.8em;
+}
+
+.award-item h5 {
+  color: var(--color-primary);
+  font-size: var(--scale0);
+  margin: 0;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.award-item .meta {
+  color: var(--color-secondary);
+  font-size: 0.85em;
+  margin-top: 0.2em;
+}
+
+/* Make awards section more compact on larger screens */
+@media (min-width: 48em) {
+  #awards {
+    margin: 1em 0;
+  }
+
+  #awards .grid-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.2em;
+  }
+}
+
+/* Adjust awards layout for very wide screens */
+@media (min-width: 90em) {
+  #awards .grid-list {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}

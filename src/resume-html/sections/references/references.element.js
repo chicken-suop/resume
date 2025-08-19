@@ -1,3 +1,5 @@
+import './references.css';
+
 class ResumeReferencesElement extends HTMLElement {
   connectedCallback() {
     const references = JSON.parse(this.attributes.references.value);

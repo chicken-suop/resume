@@ -1,0 +1,70 @@
+/* Add these styles for references */
+#references blockquote {
+  border-left: none;
+  padding: 0;
+  margin: 0;
+}
+
+#references .reference-content {
+  border-left: 0.2em solid var(--color-dimmed);
+  padding-left: 1.5em;
+  transition: var(--transition-theme);
+}
+
+#references blockquote p {
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+}
+
+#references blockquote p:first-child {
+  margin-bottom: 0.5em;
+}
+
+#references cite {
+  color: var(--color-secondary);
+  display: block;
+  font-size: 0.9em;
+  font-style: normal;
+  line-height: 1.5;
+  margin: 0;
+  transition: var(--transition-theme);
+}
+
+#references cite time {
+  color: var(--color-secondary);
+  font-size: 0.9em;
+  transition: var(--transition-theme);
+}
+
+/* References section styles */
+#references .stack {
+  display: grid;
+  gap: 2.5em;
+}
+
+#references blockquote {
+  max-width: 65ch; /* Limit line length for better readability */
+  margin: 0;
+}
+
+/* Mobile: Single column for all references */
+#references .stack {
+  grid-template-columns: 1fr;
+}
+
+/* Tablet/Desktop: Multi-column layout based on screen size */
+@media (min-width: 48em) {
+  #references .stack {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3em;
+  }
+}
+
+/* Large screens: Better column spacing */
+@media (min-width: 90em) {
+  #references .stack {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3.5em;
+  }
+}

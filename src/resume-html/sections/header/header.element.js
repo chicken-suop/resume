@@ -1,3 +1,5 @@
+import './header.css';
+
 class ResumeHeaderElement extends HTMLElement {
   connectedCallback() {
     const resumeBasic = JSON.parse(this.attributes.data.value);

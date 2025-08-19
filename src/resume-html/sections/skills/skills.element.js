@@ -1,3 +1,5 @@
+import './skills.css';
+
 class ResumeSkillsElement extends HTMLElement {
   connectedCallback() {
     const skills = JSON.parse(this.attributes.skills.value);

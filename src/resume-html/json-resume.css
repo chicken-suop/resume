@@ -1,0 +1,345 @@
+json-resume {
+  background: var(--color-background);
+  color: var(--color-primary);
+  display: grid;
+  font: 1em/1.5 Lato, sans-serif;
+  row-gap: 0;
+  column-gap: 2em;
+  grid-template-columns:
+    [full-start] minmax(0, 1fr)
+    [main-start] minmax(0, 48em)
+    [main-end] minmax(0, 1fr)
+    [full-end];
+  grid-template-rows: auto [content] 0;
+  margin-bottom: 4em;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  transition: var(--transition-theme);
+}
+
+json-resume:before {
+  content: "";
+  grid-column: full;
+  grid-row: content;
+}
+
+/* Sections */
+.masthead > *,
+section {
+  grid-column: main;
+}
+
+.stack {
+  display: grid;
+  gap: 1.5em;
+}
+
+.grid-list {
+  display: grid;
+  gap: 1em;
+}
+
+/* Add these new selectors */
+resume-header,
+resume-experiences,
+resume-volunteer,
+resume-education,
+resume-projects,
+resume-awards,
+resume-skills,
+resume-interests,
+resume-references {
+  display: contents;
+}
+
+resume-header {
+  display: grid;
+  grid-column: full;
+  gap: 2em;
+  grid-template-columns: [full-start] 1fr [main-start side-start] minmax(min-content, 12em) [side-end content-start] minmax(min-content, 36em) [main-end content-end] 1fr [full-end];
+  grid-template-rows: auto [content] 0;
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+/* Section styles */
+section {
+  margin-top: 3em;
+  position: relative;
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
+}
+
+section:first-child {
+  margin-top: 0;
+}
+
+
+/* Add consistent padding for all section content */
+section > .stack,
+section > .grid-list {
+  padding: 0.8em 0;
+}
+
+/* Match expandable header padding */
+section > .stack h4,
+section > .grid-list h4 {
+  padding: 0.5em 0;
+  margin: 0;
+}
+
+/* Remove extra padding from expandable sections */
+section > .stack > .expandable {
+  padding: 0;
+}
+
+/* Remove duplicate padding from grid lists */
+.grid-list > div {
+  padding: 0;
+}
+
+.grid-list h4 {
+  margin-bottom: 0.5em;
+}
+
+@media (min-width: 48em) {
+  section {
+    display: contents;
+  }
+
+  section > h3 {
+    position: sticky;
+    top: 1em;
+    height: fit-content;
+  }
+
+  section > *:not(h3) {
+    grid-column: main;
+  }
+
+  json-resume {
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [side-start] 12em
+      [side-end main-start] minmax(min-content, 48em)
+      [main-end] minmax(1em, 1fr)
+      [full-end];
+    max-width: none;
+  }
+}
+
+/* Base mobile styles for section titles */
+section > h3 {
+  color: var(--color-secondary);
+  font-size: var(--scale3);
+  grid-column: main;
+  text-align: left;
+  padding: 0.5em 1em;
+  position: sticky;
+  top: 0;
+  background: var(--color-background);
+  margin: 0;
+  z-index: 10;
+  transition: var(--transition-theme);
+}
+
+/* Desktop adjustments */
+@media (min-width: 48em) {
+  section > h3 {
+    grid-column: side;
+    text-align: right;
+    padding: 0.5em 2em 0.5em 1em;
+    top: 1em;
+  }
+}
+
+/* Remove scroll margin on mobile */
+section {
+  margin-top: 3em;
+  position: relative;
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
+}
+
+/* Add scroll margin back for desktop */
+@media (min-width: 48em) {
+  section {
+    scroll-margin-top: 1em;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 90em) { /* 1440px */
+  json-resume {
+    grid-template-columns:
+      [full-start] 1fr
+      [side-start] 16em
+      [side-end main-start] minmax(min-content, 60em)
+      [main-end] 1fr
+      [full-end];
+    max-width: 120em;
+    margin: 0 auto 4em;
+  }
+
+  /* Two-column layout for skills and interests */
+  #skills .grid-list,
+  #interests .grid-list {
+    grid-template-columns: repeat(auto-fit, minmax(calc((100% - 2em)/3), 1fr));
+    gap: 2em;
+  }
+
+  /* Wider spacing for better visual hierarchy */
+  .stack {
+    gap: 2em;
+  }
+
+  /* Larger image for better visibility */
+  .masthead > img {
+    max-width: 14em;
+  }
+
+  /* More generous padding */
+  .masthead {
+    padding: 4em 0;
+  }
+
+  .expandable-header {
+    padding: 1.5em;
+  }
+
+  .expandable-content {
+    padding: 0 1.5em 1.5em;
+  }
+
+  /* Two-column references layout */
+  #references .stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3em;
+  }
+
+}
+
+/* Extra large screens */
+@media (min-width: 120em) { /* 1920px */
+  json-resume {
+    grid-template-columns:
+      [full-start] 1fr
+      [side-start] 20em
+      [side-end main-start] minmax(min-content, 72em)
+      [main-end] 1fr
+      [full-end];
+    max-width: none;
+  }
+
+  /* Three-column layout for skills and interests */
+  #skills .grid-list,
+  #interests .grid-list {
+    grid-template-columns: repeat(auto-fit, minmax(calc((100% - 3em)/4), 1fr));
+  }
+
+  /* Three-column references layout */
+  #references .stack {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 48em) {
+  /* Ensure content doesn't overflow on mobile */
+  .grid-list {
+    grid-template-columns: 1fr;
+    padding: 0 1em;
+  }
+
+
+  /* Ensure expandable content doesn't cause horizontal scroll */
+  .expandable-content {
+    max-width: 100vw;
+    padding: 0 1em 1em;
+    word-break: break-word;
+  }
+
+  /* Add grid-list container constraints */
+  .grid-list {
+    grid-template-columns: 1fr;
+    padding: 0 1em;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Print button */
+.print-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-theme), opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.print-button:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.print-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+}
+
+/* Mobile styles */
+@media (max-width: 48em) {
+  .print-button {
+    bottom: 1.5rem;
+    right: 50%;
+    transform: translateX(50%);
+    border-radius: 2rem;
+    width: auto;
+    padding: 0.7rem 1.5rem;
+    background: rgba(0, 115, 170, 0.9); /* Semi-transparent accent color */
+    backdrop-filter: blur(4px);
+    gap: 0.5rem;
+  }
+
+  .print-button::after {
+    content: "Download Resume";
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .print-button svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  /* Hide when keyboard is open (assuming viewport height changes) */
+  @media (max-height: 450px) {
+    .print-button {
+      display: none;
+    }
+  }
+}
+
+/* Mobile print button visibility */
+@media (max-width: 48em) {
+  .print-button.hide-on-mobile {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(50%) translateY(100%);
+  }
+}

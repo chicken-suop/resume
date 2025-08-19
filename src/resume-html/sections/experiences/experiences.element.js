@@ -1,7 +1,9 @@
+import './experiences.css';
+import '../../utils/expandable.css';
 import {
   renderExpandableArticle,
   setupExpandables,
-} from '../utils/expandable.js';
+} from '../../utils/expandable.js';
 
 class ResumeExperiencesElement extends HTMLElement {
   connectedCallback() {

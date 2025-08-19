@@ -1,7 +1,9 @@
+import './volunteer.css';
+import '../../utils/expandable.css';
 import {
   renderExpandableArticle,
   setupExpandables,
-} from '../utils/expandable.js';
+} from '../../utils/expandable.js';
 
 class ResumeVolunteerElement extends HTMLElement {
   connectedCallback() {

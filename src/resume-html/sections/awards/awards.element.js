@@ -1,3 +1,5 @@
+import './awards.css';
+
 class ResumeAwardsElement extends HTMLElement {
   connectedCallback() {
     const awards = JSON.parse(this.attributes.awards.value);

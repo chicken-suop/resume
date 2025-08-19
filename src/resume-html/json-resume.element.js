@@ -1,13 +1,14 @@
-import './sections/resume-header.element.js';
-import './sections/resume-about.element.js';
-import './sections/resume-skills.element.js';
-import './sections/resume-experiences.element.js';
-import './sections/resume-education.element.js';
-import './sections/resume-projects.element.js';
-import './sections/resume-awards.element.js';
-import './sections/resume-volunteer.element.js';
-import './sections/resume-references.element.js';
-import './sections/resume-interests.element.js';
+import './json-resume.css';
+import './sections/header/header.element.js';
+import './sections/about/about.element.js';
+import './sections/skills/skills.element.js';
+import './sections/experiences/experiences.element.js';
+import './sections/education/education.element.js';
+import './sections/projects/projects.element.js';
+import './sections/awards/awards.element.js';
+import './sections/volunteer/volunteer.element.js';
+import './sections/references/references.element.js';
+import './sections/interests/interests.element.js';
 import './components/time-duration.element.js';
 import './components/night-mode-toggle.element.js';
 

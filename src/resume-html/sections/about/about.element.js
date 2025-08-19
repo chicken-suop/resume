@@ -1,3 +1,5 @@
+import './about.css';
+
 class ResumeAboutElement extends HTMLElement {
   connectedCallback() {
     const resumeBasic = JSON.parse(this.attributes.data.value);

@@ -1,3 +1,5 @@
+import './interests.css';
+
 const DEVELOPER_BOOKS_INTEREST_NAME = 'Developer books I recommend';
 const DEVELOPER_BOOKS_LINKS = {
   'Clean Code':
