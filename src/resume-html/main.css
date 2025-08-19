@@ -26,6 +26,7 @@ json-resume {
   margin-bottom: 4em;
   width: 100%;
   position: relative;
+  transition: var(--transition-theme);
 }
 
 json-resume:before {
@@ -55,6 +56,10 @@ json-resume:before {
   --color-secondary: var(--color-secondary-light);
   --color-accent: var(--color-accent-light);
 
+  --transition-theme: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.2s ease;
+  --transition-smooth: all 0.4s ease;
+
   --scale-ratio: 1.25;
   --scale0: 1rem;
   --scale1: calc(var(--scale0) * var(--scale-ratio));
@@ -77,29 +82,45 @@ json-resume:before {
 /* Typography */
 h1, h2, h3, h5 {
   font-weight: 400;
+  transition: var(--transition-theme);
 }
 
 h1, h2, h3 {
   line-height: 1.2;
 }
 
-h1 { font-size: var(--scale5); }
+h1 { 
+  font-size: var(--scale5);
+  transition: var(--transition-theme);
+}
 h2 {
   color: var(--color-secondary);
   font-size: var(--scale4);
+  transition: var(--transition-theme);
 }
 h3 {
   color: var(--color-secondary);
   font-size: var(--scale3);
+  transition: var(--transition-theme);
 }
-h4 { font-size: var(--scale2); }
-h5 { font-size: var(--scale1); }
-h6 { font-size: var(--scale0); }
+h4 { 
+  font-size: var(--scale2);
+  transition: var(--transition-theme);
+}
+h5 { 
+  font-size: var(--scale1);
+  transition: var(--transition-theme);
+}
+h6 { 
+  font-size: var(--scale0);
+  transition: var(--transition-theme);
+}
 
 /* Links */
 a {
   color: var(--color-accent);
   text-decoration: none;
+  transition: var(--transition-fast);
 }
 
 a:hover, a:focus {
@@ -117,6 +138,7 @@ ol, ul {
 
 li::marker, .network {
   color: var(--color-secondary);
+  transition: var(--transition-theme);
 }
 
 .tag-list {
@@ -132,6 +154,7 @@ li::marker, .network {
   background: var(--color-dimmed);
   border-radius: 0.2em;
   padding: 0.2em 0.6em;
+  transition: var(--transition-fast);
 }
 
 .icon-list {
@@ -167,6 +190,7 @@ section {
   grid-column: full;
   padding: 3em 1.5em;
   text-align: left;
+  transition: var(--transition-theme);
 }
 
 .masthead > img {
@@ -177,6 +201,7 @@ section {
   height: 8em;
   aspect-ratio: 1;
   object-fit: cover;
+  transition: var(--transition-theme);
 }
 
 .masthead h1 {
@@ -286,6 +311,7 @@ cite:before {
 
 .meta {
   color: var(--color-secondary);
+  transition: var(--transition-theme);
 }
 
 svg {
@@ -492,6 +518,7 @@ section > .stack .expandable-header h4 {
   align-items: center;
   gap: 0.3em;
   order: 0;
+  transition: var(--transition-theme);
 }
 
 .expandable-header h4 .company {
@@ -499,6 +526,7 @@ section > .stack .expandable-header h4 {
   font-size: 0.7em;
   font-weight: normal;
   order: 1;
+  transition: var(--transition-theme);
 }
 
 .expandable-header .meta {
@@ -681,6 +709,7 @@ section > h3 {
   background: var(--color-background);
   margin: 0;
   scroll-snap-stop: always;
+  transition: var(--transition-theme);
 }
 
 /* Add consistent padding for all section content */
@@ -981,6 +1010,7 @@ body {
   width: 100%;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+  transition: var(--transition-theme);
 }
 
 @media (prefers-color-scheme: dark) {

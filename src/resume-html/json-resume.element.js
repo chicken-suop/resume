@@ -9,6 +9,7 @@ import './sections/resume-volunteer.element.js';
 import './sections/resume-references.element.js';
 import './sections/resume-interests.element.js';
 import './components/time-duration.element.js';
+import './components/night-mode-toggle.element.js';
 
 class JsonResumeElement extends HTMLElement {
   async connectedCallback() {
@@ -36,6 +37,7 @@ class JsonResumeElement extends HTMLElement {
 
   render(resumeData) {
     this.innerHTML = `
+      <night-mode-toggle></night-mode-toggle>
       <resume-header data='${this.safeStringify(resumeData.basics)}'></resume-header>
       <resume-experiences works='${this.safeStringify(resumeData.work || [])}'></resume-experiences>
       <resume-volunteer volunteer='${this.safeStringify(resumeData.volunteer || [])}'></resume-volunteer>
