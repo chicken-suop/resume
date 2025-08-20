@@ -63,6 +63,7 @@ jobs:
           path: ./dist
       - name: Prepare deployment directory
         run: |
+          mv dist/resume.html dist/index.html
           cp ./artifacts/pdf/resume.pdf dist/resume.pdf
           touch dist/.nojekyll
           cp public/resume.base.json dist/ || true
