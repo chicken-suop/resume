@@ -5,18 +5,6 @@ import postcss from 'postcss';
 import { build } from 'vite';
 
 const CSS_MINIFY_OPTIONS = {
-  dev: {
-    preset: [
-      'default',
-      {
-        discardComments: { removeAll: true },
-        mergeLonghand: false,
-        minifyParams: false,
-        minifySelectors: false,
-        normalizeWhitespace: { exclude: false },
-      },
-    ],
-  },
   prod: {
     preset: [
       'default',
@@ -131,15 +119,14 @@ async function inlineAssets(distPath, isProd) {
       'utf-8',
     );
 
-    const minifyOptions = isProd
-      ? CSS_MINIFY_OPTIONS.prod
-      : CSS_MINIFY_OPTIONS.dev;
-    const minifiedCss = await postcss([cssnano(minifyOptions)]).process(
-      cssContent,
-      { from: undefined },
-    );
-
-    css += minifiedCss.css;
+    if (isProd) {
+      const minifiedCss = await postcss([
+        cssnano(CSS_MINIFY_OPTIONS.prod),
+      ]).process(cssContent, { from: undefined });
+      css += minifiedCss.css;
+    } else {
+      css += cssContent;
+    }
   }
 
   let js = '';
