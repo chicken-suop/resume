@@ -6,27 +6,34 @@ export async function render(mode = 'normal') {
   const useTailoredResume = process.env.VITE_USE_TAILORED_RESUME === 'true';
 
   // Set up DOM environment with jsdom for better W3C compliance
-  const dom = new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>', {
-    url: 'https://localhost:3000',
-    pretendToBeVisual: true,
-    resources: 'usable'
-  });
+  const dom = new JSDOM(
+    '<!DOCTYPE html><html><head></head><body></body></html>',
+    {
+      pretendToBeVisual: true,
+      resources: 'usable',
+      url: 'https://localhost:3000',
+    },
+  );
 
   const window = dom.window;
 
   // Add missing browser APIs
-  window.matchMedia = window.matchMedia || function(media) {
-    return {
-      matches: false,
-      media: media,
-      onchange: null,
-      addListener: function() {},
-      removeListener: function() {},
-      addEventListener: function() {},
-      removeEventListener: function() {},
-      dispatchEvent: function() { return true; }
+  window.matchMedia =
+    window.matchMedia ||
+    function (media) {
+      return {
+        addEventListener: function () {},
+        addListener: function () {},
+        dispatchEvent: function () {
+          return true;
+        },
+        matches: false,
+        media: media,
+        onchange: null,
+        removeEventListener: function () {},
+        removeListener: function () {},
+      };
     };
-  };
 
   global.window = window;
   global.document = window.document;
@@ -39,7 +46,7 @@ export async function render(mode = 'normal') {
 
   // Automatically import all .element.js files
   const componentModules = import.meta.glob('./resume-html/**/*.element.js');
-  
+
   for (const path in componentModules) {
     await componentModules[path]();
   }
@@ -58,8 +65,8 @@ export async function render(mode = 'normal') {
       url.includes('resume.tailored.json')
     ) {
       return {
-        ok: true,
         json: () => Promise.resolve(resumeData),
+        ok: true,
       };
     }
     throw new Error(`Unknown fetch URL: ${url}`);
@@ -69,10 +76,14 @@ export async function render(mode = 'normal') {
   const jsonResumeElement = window.document.createElement('json-resume');
 
   // Helper function to wait for DOM stability
-  async function waitForDOMStability(window, maxAttempts = 50, stableChecks = 3) {
+  async function waitForDOMStability(
+    window,
+    maxAttempts = 50,
+    stableChecks = 3,
+  ) {
     let lastHTML = '';
     let stableCount = 0;
-    
+
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       // Allow one animation frame for rendering
       await new Promise(resolve => {
@@ -82,26 +93,26 @@ export async function render(mode = 'normal') {
           setTimeout(resolve, 16); // Fallback: ~60fps
         }
       });
-      
+
       const currentHTML = window.document.body.innerHTML;
-      
+
       if (currentHTML === lastHTML) {
         stableCount++;
         if (stableCount >= stableChecks) {
-          console.log(`DOM stabilized after ${attempt + 1} attempts`);
+          // DOM stabilized
           return; // DOM is stable
         }
       } else {
         stableCount = 0; // Reset counter if DOM changed
       }
-      
+
       lastHTML = currentHTML;
-      
+
       // Small delay between checks
       await new Promise(resolve => setTimeout(resolve, 20));
     }
-    
-    console.warn(`DOM did not stabilize after ${maxAttempts} attempts, proceeding anyway`);
+
+    // DOM did not stabilize, proceeding anyway
   }
 
   // Add to document to trigger connectedCallback
@@ -130,15 +141,15 @@ export async function render(mode = 'normal') {
   metaDescription.setAttribute('content', resumeData.basics.summary);
 
   return {
-    html: html,
     head: {
-      title: window.document.title,
       meta: [
         {
-          name: 'description',
           content: resumeData.basics.summary,
+          name: 'description',
         },
       ],
+      title: window.document.title,
     },
+    html: html,
   };
 }

@@ -6,7 +6,7 @@ import './resume-html/main.css';
 import './resume-html/json-resume.css';
 // Import all component CSS that actually exist
 import './resume-html/sections/header/header.css';
-import './resume-html/sections/about/about.css'; 
+import './resume-html/sections/about/about.css';
 import './resume-html/sections/skills/skills.css';
 import './resume-html/sections/experiences/experiences.css';
 import './resume-html/sections/education/education.css';

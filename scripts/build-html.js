@@ -1,56 +1,77 @@
+import cssnano from 'cssnano';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { build } from 'vite';
-import cssnano from 'cssnano';
 import postcss from 'postcss';
+import { build } from 'vite';
 
-async function generateStandaloneHTML(isProd = false) {
-  console.log(`Building HTML${isProd ? ' [PRODUCTION]' : ''}...`);
-
-  const useTailoredResume = process.env['VITE_USE_TAILORED_RESUME'] === 'true';
-
-  // Phase 1: Build the SSR server bundle
-  console.log('Phase 1: Building SSR server bundle...');
-  await build({
-    define: {
-      'import.meta.env.VITE_USE_TAILORED_RESUME':
-        JSON.stringify(useTailoredResume),
-    },
-    build: {
-      outDir: 'dist-ssr',
-      emptyOutDir: true,
-      ssr: 'src/entry-server.js',
-      minify: 'esbuild',
-      sourcemap: false,
-      rollupOptions: {
-        output: {
-          entryFileNames: 'entry-server.js',
-        },
+const CSS_MINIFY_OPTIONS = {
+  dev: {
+    preset: [
+      'default',
+      {
+        discardComments: { removeAll: true },
+        mergeLonghand: false,
+        minifyParams: false,
+        minifySelectors: false,
+        normalizeWhitespace: { exclude: false },
       },
-    },
-  });
+    ],
+  },
+  prod: {
+    preset: [
+      'default',
+      {
+        discardComments: { removeAll: true },
+        mergeLonghand: true,
+        minifyParams: true,
+        minifySelectors: true,
+        normalizeWhitespace: true,
+      },
+    ],
+  },
+};
 
-  // Phase 2: Build client assets for CSS and JS extraction
-  console.log('Phase 2: Building client assets...');
-  await build({
+function createBuildConfig(type, isProd, useTailored) {
+  const baseConfig = {
     define: {
-      'import.meta.env.VITE_USE_TAILORED_RESUME':
-        JSON.stringify(useTailoredResume),
+      'import.meta.env.VITE_USE_TAILORED_RESUME': JSON.stringify(useTailored),
     },
+  };
+
+  if (type === 'ssr') {
+    return {
+      ...baseConfig,
+      build: {
+        emptyOutDir: true,
+        minify: 'esbuild',
+        outDir: 'dist-ssr',
+        rollupOptions: {
+          output: {
+            entryFileNames: 'entry-server.js',
+          },
+        },
+        sourcemap: false,
+        ssr: 'src/entry-server.js',
+      },
+    };
+  }
+
+  return {
+    ...baseConfig,
     build: {
+      emptyOutDir: true,
+      minify: 'esbuild',
       outDir: 'dist-client',
-      emptyOutDir: true,
-      minify: 'esbuild',
-      sourcemap: false,
       rollupOptions: {
-        input: 'src/entry-client.js', // Single entry that includes CSS + JS
+        input: 'src/entry-client.js',
         output: {
-          format: 'iife', // Self-contained function (no module imports)
-          entryFileNames: 'assets/app.js',
           assetFileNames: 'assets/[name].[ext]',
-          inlineDynamicImports: true, // Bundle all dependencies inline
+          entryFileNames: 'assets/app.js',
+          format: 'iife',
+          inlineDynamicImports: true,
         },
       },
+      sourcemap: false,
       ...(isProd && {
         minify: 'terser',
         terserOptions: {
@@ -58,150 +79,101 @@ async function generateStandaloneHTML(isProd = false) {
             drop_console: true,
             drop_debugger: true,
           },
-          mangle: true,
           format: {
             comments: false,
           },
+          mangle: true,
         },
       }),
     },
-  });
+  };
+}
 
-  // Phase 3: Execute the bundled SSR code
-  console.log('Phase 3: Executing SSR to generate HTML...');
-
-  const entryServerPath = path.resolve(
-    process.cwd(),
-    'dist-ssr',
-    'entry-server.js',
-  );
-  const { render } = await import(entryServerPath);
-
-  // First pass to get basic HTML - we'll optimize images after
-  const { html: renderedHtml, head } = await render();
-
-  // Phase 4: Optimize and inline assets
-  console.log('Phase 4: Optimizing assets...');
-
-  let optimizedImageDataUri = '';
-  let optimizedFaviconDataUri = '';
+async function processImages(imagePath) {
+  let profile = '';
+  let favicon = '';
 
   try {
-    // Optimize profile image
     const sharp = (await import('sharp')).default;
-    const imageBuffer = await fs.readFile('public/picture.jpeg');
-    const optimizedImage = await sharp(imageBuffer)
-      .resize(200, 200, { fit: 'cover', position: 'center' })
-      .jpeg({ quality: 85, progressive: true })
-      .toBuffer();
-    optimizedImageDataUri = `data:image/jpeg;base64,${optimizedImage.toString('base64')}`;
-    console.log(
-      `  ✓ Profile image optimized: ${imageBuffer.length} → ${optimizedImage.length} bytes`,
-    );
-  } catch (error) {
-    console.warn('  ⚠ Profile image optimization failed:', error.message);
+    const imageBuffer = await fs.readFile(imagePath);
+
+    const [optimizedImage, optimizedFavicon] = await Promise.all([
+      sharp(imageBuffer)
+        .resize(200, 200, { fit: 'cover', position: 'center' })
+        .jpeg({ progressive: true, quality: 85 })
+        .toBuffer(),
+      sharp(imageBuffer)
+        .resize(32, 32, { fit: 'cover', position: 'center' })
+        .png({ quality: 90 })
+        .toBuffer(),
+    ]);
+
+    profile = `data:image/jpeg;base64,${optimizedImage.toString('base64')}`;
+    favicon = `data:image/png;base64,${optimizedFavicon.toString('base64')}`;
+  } catch {
+    // Image processing failed
   }
 
-  try {
-    // Create optimized favicon from profile image
-    const sharp = (await import('sharp')).default;
-    const imageBuffer = await fs.readFile('public/picture.jpeg');
-    const optimizedFavicon = await sharp(imageBuffer)
-      .resize(32, 32, { fit: 'cover', position: 'center' })
-      .png({ quality: 90 })
-      .toBuffer();
-    optimizedFaviconDataUri = `data:image/png;base64,${optimizedFavicon.toString('base64')}`;
-    console.log(
-      `  ✓ Favicon created from profile image: ${optimizedFavicon.length} bytes`,
-    );
-  } catch (error) {
-    console.warn('  ⚠ Favicon creation failed:', error.message);
-  }
+  return { favicon, profile };
+}
 
-  // Phase 5: Extract and inline CSS and JavaScript
-  console.log('Phase 5: Inlining CSS and JavaScript...');
-  const assetsDir = path.join('dist-client', 'assets');
+async function inlineAssets(distPath, isProd) {
+  const assetsDir = path.join(distPath, 'assets');
   const assetFiles = await fs.readdir(assetsDir);
 
   const cssFiles = assetFiles.filter(f => f.endsWith('.css'));
   const jsFiles = assetFiles.filter(f => f.endsWith('.js'));
 
-  let inlinedCss = '';
+  let css = '';
   for (const cssFile of cssFiles) {
     const cssContent = await fs.readFile(
       path.join(assetsDir, cssFile),
       'utf-8',
     );
 
-    // Minify CSS with prod/dev settings
-    const cssMinifyOptions = isProd
-      ? {
-          preset: [
-            'default',
-            {
-              discardComments: { removeAll: true },
-              normalizeWhitespace: true,
-              minifySelectors: true,
-              minifyParams: true,
-              mergeLonghand: true,
-            },
-          ],
-        }
-      : {
-          preset: [
-            'default',
-            {
-              normalizeWhitespace: { exclude: false },
-              discardComments: { removeAll: true },
-              minifySelectors: false,
-              minifyParams: false,
-              mergeLonghand: false,
-            },
-          ],
-        };
-
-    const minifiedCss = await postcss([cssnano(cssMinifyOptions)]).process(
+    const minifyOptions = isProd
+      ? CSS_MINIFY_OPTIONS.prod
+      : CSS_MINIFY_OPTIONS.dev;
+    const minifiedCss = await postcss([cssnano(minifyOptions)]).process(
       cssContent,
       { from: undefined },
     );
 
-    inlinedCss += minifiedCss.css;
+    css += minifiedCss.css;
   }
 
-  // Extract client-side JavaScript bundle
-  let clientScript = '';
+  let js = '';
   if (jsFiles.length > 0) {
-    const jsFile = jsFiles[0]; // Should be app.js
+    const jsFile = jsFiles[0];
     const jsContent = await fs.readFile(path.join(assetsDir, jsFile), 'utf-8');
-    clientScript = `<script type="module">${jsContent}</script>`;
+    js = `<script type="module">${jsContent}</script>`;
   }
 
-  // Phase 6: Create final HTML document
-  console.log('Phase 6: Creating final HTML document...');
+  return { css, js };
+}
 
+function assembleHTML(template, assets, images) {
+  const { head, html } = template;
+  const { css, js } = assets;
+  const { favicon, profile } = images;
 
-  // Replace image references with optimized data URI in rendered HTML
-  let processedHtml = renderedHtml;
-  if (optimizedImageDataUri) {
-    // Replace src attributes
+  let processedHtml = html;
+  if (profile) {
     processedHtml = processedHtml.replace(
       /src="[^"]*picture\.jpeg[^"]*"/g,
-      `src="${optimizedImageDataUri}"`,
+      `src="${profile}"`,
     );
-    // Replace JSON data attributes (optional cleanup)
     processedHtml = processedHtml.replace(
       /&quot;\/picture\.jpeg&quot;/g,
-      `&quot;${optimizedImageDataUri}&quot;`,
+      `&quot;${profile}&quot;`,
     );
   }
 
-  // Build favicon link
-  const faviconLink = optimizedFaviconDataUri
-    ? `<link rel="icon" type="image/png" href="${optimizedFaviconDataUri}" />`
+  const faviconLink = favicon
+    ? `<link rel="icon" type="image/png" href="${favicon}" />`
     : '';
 
-  // Construct final HTML
-  let finalHtml = `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -209,56 +181,68 @@ async function generateStandaloneHTML(isProd = false) {
     ${faviconLink}
     <title>${head.title}</title>
     ${head.meta.map(meta => `<meta name="${meta.name}" content="${meta.content}">`).join('\n    ')}
-    <style>${inlinedCss}</style>
+    <style>${css}</style>
 </head>
 <body>
     ${processedHtml}
-    ${clientScript}
+    ${js}
 </body>
 </html>`;
+}
 
-  // HTML minification for production builds
-  if (isProd) {
-    try {
-      const { minify } = await import('html-minifier-terser');
-      finalHtml = await minify(finalHtml, {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeAttributeQuotes: true,
-        removeRedundantAttributes: true,
-        collapseBooleanAttributes: true,
-        removeEmptyAttributes: true,
-        // DO NOT re-minify embedded content (already optimized by terser/cssnano)
-        minifyCSS: false,
-        minifyJS: false,
-      });
-      console.log('  ✓ HTML structure minified');
-    } catch (error) {
-      console.warn('  ⚠ HTML minification failed:', error.message);
-    }
+async function minifyHTML(html, isProd) {
+  if (!isProd) return html;
+
+  try {
+    const { minify } = await import('html-minifier-terser');
+    return await minify(html, {
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true,
+      minifyCSS: false,
+      minifyJS: false,
+      removeAttributeQuotes: true,
+      removeComments: true,
+      removeEmptyAttributes: true,
+      removeRedundantAttributes: true,
+    });
+  } catch {
+    return html;
   }
+}
 
-  // Phase 7: Write final HTML file and cleanup
-  await fs.mkdir('dist', { recursive: true });
-  const outputPath = 'dist/resume.html';
-  await fs.writeFile(outputPath, finalHtml, 'utf-8');
-
-  // Clean up temporary build directories
-  await fs.rm('dist-ssr', { recursive: true, force: true });
-  await fs.rm('dist-client', { recursive: true, force: true });
-
-  const stats = await fs.stat(outputPath);
-  console.log(
-    `✅ Generated ${outputPath} (${(stats.size / 1024).toFixed(1)}KB)${isProd ? ' [PRODUCTION]' : ''}`,
+async function cleanup(dirs) {
+  await Promise.all(
+    dirs.map(dir => fs.rm(dir, { force: true, recursive: true })),
   );
+}
+
+async function generateStandaloneHTML(isProd = false) {
+  const useTailored = process.env['VITE_USE_TAILORED_RESUME'] === 'true';
+
+  await build(createBuildConfig('ssr', isProd, useTailored));
+  await build(createBuildConfig('client', isProd, useTailored));
+
+  const entryServerPath = path.resolve(
+    process.cwd(),
+    'dist-ssr',
+    'entry-server.js',
+  );
+  const { render } = await import(entryServerPath);
+  const { head, html } = await render();
+
+  const images = await processImages('public/picture.jpeg');
+  const assets = await inlineAssets('dist-client', isProd);
+
+  const assembledHtml = assembleHTML({ head, html }, assets, images);
+  const finalHtml = await minifyHTML(assembledHtml, isProd);
+
+  await fs.mkdir('dist', { recursive: true });
+  await fs.writeFile('dist/resume.html', finalHtml, 'utf-8');
+  await cleanup(['dist-ssr', 'dist-client']);
 }
 
 // Parse command-line arguments
 const args = process.argv.slice(2);
 const isProd = args.includes('--prod');
-
-if (isProd) {
-  console.log('🚀 Production mode enabled - aggressive minification');
-}
 
 await generateStandaloneHTML(isProd);
