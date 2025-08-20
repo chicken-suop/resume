@@ -58,13 +58,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: resume-html
-          path: ./artifacts/html
+          path: ./dist
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Prepare deployment directory
         run: |
-          mkdir -p dist
-          cp -r ./artifacts/html/* dist/
           cp ./artifacts/pdf/resume.pdf dist/resume.pdf
           touch dist/.nojekyll
           cp public/resume.base.json dist/ || true
