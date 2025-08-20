@@ -48,7 +48,7 @@
   "scripts": {
     "build:html": "bun scripts/build-html.js",
     "build:html:prod": "bun scripts/build-html.js both --prod",
-    "build:pdf": "bun scripts/generate-pdf.js",
+    "build:pdf": "scripts/build.sh",
     "dev": "vite",
     "lint": "lint-staged",
     "prepare": "is-ci || husky"
