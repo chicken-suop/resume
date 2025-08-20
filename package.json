@@ -1,6 +1,7 @@
 {
   "author": "Elliot Schep <elliot@schell.fish>",
   "dependencies": {
+    "caniuse-lite": "1.0.30001735",
     "clsx": "2.1.1",
     "json-colorizer": "3.0.1",
     "openai": "4.76.3",
@@ -18,14 +19,20 @@
     "@busybox/tailwindcss-config": "2024.11.10-alpha.2150",
     "@commitlint/cli": "19.6.0",
     "autoprefixer": "10.4.20",
+    "cssnano": "7.1.0",
     "eslint": "9.16.0",
     "globals": "15.13.0",
+    "happy-dom": "18.0.1",
+    "html-minifier-terser": "7.2.0",
     "husky": "9.1.7",
     "is-ci": "4.1.0",
+    "jsdom": "26.1.0",
     "lint-staged": "15.2.11",
     "postcss": "8.4.49",
     "prettier": "3.4.2",
     "resume-schema": "1.0.1",
+    "sharp": "0.34.3",
+    "svgo": "4.0.0",
     "tailwindcss": "3.4.16",
     "vitest": "2.1.8"
   },
@@ -39,6 +46,11 @@
   "private": true,
   "repository": "git@github.com:chicken-suop/resume.git",
   "scripts": {
+    "build:html": "bun scripts/build-html.js",
+    "build:html:prod": "bun scripts/build-html.js both --prod",
+    "build:pdf": "bun scripts/generate-pdf.js",
+    "dev": "vite",
+    "lint": "lint-staged",
     "prepare": "is-ci || husky"
   },
   "type": "module",
