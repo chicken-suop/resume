@@ -1,45 +1,48 @@
-import { Window } from 'happy-dom';
+import { JSDOM } from 'jsdom';
 import fs from 'node:fs';
 import path from 'node:path';
 
 export async function render(mode = 'normal') {
   const useTailoredResume = process.env.VITE_USE_TAILORED_RESUME === 'true';
 
-  // Set up DOM environment
-  const window = new Window({
+  // Set up DOM environment with jsdom for better W3C compliance
+  const dom = new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>', {
     url: 'https://localhost:3000',
-    width: 1024,
-    height: 768,
+    pretendToBeVisual: true,
+    resources: 'usable'
   });
 
-  // Set window.SyntaxError to the native constructor
-  window.SyntaxError = SyntaxError;
-  window.TypeError = TypeError;
-  window.Error = Error;
+  const window = dom.window;
+
+  // Add missing browser APIs
+  window.matchMedia = window.matchMedia || function(media) {
+    return {
+      matches: false,
+      media: media,
+      onchange: null,
+      addListener: function() {},
+      removeListener: function() {},
+      addEventListener: function() {},
+      removeEventListener: function() {},
+      dispatchEvent: function() { return true; }
+    };
+  };
 
   global.window = window;
   global.document = window.document;
   global.HTMLElement = window.HTMLElement;
   global.customElements = window.customElements;
   global.localStorage = window.localStorage;
-  global.SyntaxError = SyntaxError;
-  global.TypeError = TypeError;
-  global.Error = Error;
+  global.SyntaxError = window.SyntaxError;
+  global.TypeError = window.TypeError;
+  global.Error = window.Error;
 
-  // Now dynamically import all the web components after DOM globals are set
-  await import('./resume-html/json-resume.element.js');
-  await import('./resume-html/sections/header/header.element.js');
-  await import('./resume-html/sections/about/about.element.js');
-  await import('./resume-html/sections/skills/skills.element.js');
-  await import('./resume-html/sections/experiences/experiences.element.js');
-  await import('./resume-html/sections/education/education.element.js');
-  await import('./resume-html/sections/projects/projects.element.js');
-  await import('./resume-html/sections/awards/awards.element.js');
-  await import('./resume-html/sections/volunteer/volunteer.element.js');
-  await import('./resume-html/sections/references/references.element.js');
-  await import('./resume-html/sections/interests/interests.element.js');
-  await import('./resume-html/components/time-duration.element.js');
-  await import('./resume-html/components/night-mode-toggle.element.js');
+  // Automatically import all .element.js files
+  const componentModules = import.meta.glob('./resume-html/**/*.element.js');
+  
+  for (const path in componentModules) {
+    await componentModules[path]();
+  }
 
   // Load resume data
   const resumeJsonPath = useTailoredResume
@@ -65,38 +68,47 @@ export async function render(mode = 'normal') {
   // Create the main resume element
   const jsonResumeElement = window.document.createElement('json-resume');
 
+  // Helper function to wait for DOM stability
+  async function waitForDOMStability(window, maxAttempts = 50, stableChecks = 3) {
+    let lastHTML = '';
+    let stableCount = 0;
+    
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      // Allow one animation frame for rendering
+      await new Promise(resolve => {
+        if (window.requestAnimationFrame) {
+          window.requestAnimationFrame(resolve);
+        } else {
+          setTimeout(resolve, 16); // Fallback: ~60fps
+        }
+      });
+      
+      const currentHTML = window.document.body.innerHTML;
+      
+      if (currentHTML === lastHTML) {
+        stableCount++;
+        if (stableCount >= stableChecks) {
+          console.log(`DOM stabilized after ${attempt + 1} attempts`);
+          return; // DOM is stable
+        }
+      } else {
+        stableCount = 0; // Reset counter if DOM changed
+      }
+      
+      lastHTML = currentHTML;
+      
+      // Small delay between checks
+      await new Promise(resolve => setTimeout(resolve, 20));
+    }
+    
+    console.warn(`DOM did not stabilize after ${maxAttempts} attempts, proceeding anyway`);
+  }
+
   // Add to document to trigger connectedCallback
   window.document.body.appendChild(jsonResumeElement);
 
-  // Wait longer for all components to render (including async operations)
-  await new Promise(resolve => setTimeout(resolve, 500));
-
-  // Manually trigger connectedCallback if it hasn't been called
-  if (typeof jsonResumeElement.connectedCallback === 'function') {
-    await jsonResumeElement.connectedCallback();
-  }
-
-  // Give additional time for all nested components to render
-  await new Promise(resolve => setTimeout(resolve, 300));
-
-  // Manually trigger connectedCallback for all nested custom elements
-  const allCustomElements = window.document.querySelectorAll('*');
-  for (const element of allCustomElements) {
-    if (
-      element.tagName &&
-      element.tagName.includes('-') &&
-      typeof element.connectedCallback === 'function'
-    ) {
-      try {
-        await element.connectedCallback();
-      } catch (e) {
-        console.error(`Error in ${element.tagName} connectedCallback:`, e);
-      }
-    }
-  }
-
-  // Wait a bit more for all components to finish rendering
-  await new Promise(resolve => setTimeout(resolve, 200));
+  // Wait for DOM to stabilize using a more robust approach
+  await waitForDOMStability(window);
 
   // Get the rendered HTML
   let html = jsonResumeElement.outerHTML;
