@@ -49,6 +49,8 @@ jobs:
     needs: [build-pdf, build-html]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Download PDF artifact
         uses: actions/download-artifact@v4
         with:
@@ -59,8 +61,6 @@ jobs:
         with:
           name: resume-html
           path: ./dist
-      - name: Checkout repository
-        uses: actions/checkout@v4
       - name: Prepare deployment directory
         run: |
           cp ./artifacts/pdf/resume.pdf dist/resume.pdf
