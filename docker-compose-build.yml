@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    entrypoint: [node, src/build-pdf.js]
+    entrypoint: [bun, src/build-pdf.js]
     volumes:
       - source: ./public/resume.pdf
         target: /app/public/resume.pdf
